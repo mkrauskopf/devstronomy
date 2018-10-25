@@ -1,8 +1,8 @@
 # Table of Contents
 1. [Description](#Description)
 2. [Datasets](#Datasets)
-  1. [Planets](#planets)
-  2. [Planetary satellites](#satellites)
+   1. [Planets](#planets)
+   2. [Planetary satellites](#satellites)
 
 
 # Description
