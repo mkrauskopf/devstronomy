@@ -35,6 +35,7 @@ task generateJOOQ {
         new groovy.xml.MarkupBuilder(writer)
                 .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.11.0.xsd') {
             jdbc() {
+                // TODO: do not hardcode DB URL and credentials
                 driver('com.mysql.cj.jdbc.Driver')
                 url('jdbc:mysql://localhost:3306/')
                 user('root')
