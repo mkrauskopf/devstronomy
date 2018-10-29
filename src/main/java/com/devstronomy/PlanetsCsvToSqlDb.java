@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static com.devstronomy.jooq.generated.Tables.PLANETS;
+import static com.devstronomy.jooq.generated.Tables.PLANET;
 
 /**
  * Reads data from planets CSV file and insert them into the SQL database.
@@ -49,13 +49,13 @@ final class PlanetsCsvToSqlDb {
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER_NAME, DB_PASSWORD)) {
             // TODO: Try to find a less verbose, yet typesafe, way to insert data with JOOQ.
             DSL.using(conn, SQLDialect.MYSQL)
-                    .insertInto(PLANETS,
-                            PLANETS.PLANET, PLANETS.MASS, PLANETS.DIAMETER, PLANETS.DENSITY, PLANETS.GRAVITY,
-                            PLANETS.ESCAPE_VELOCITY, PLANETS.ROTATION_PERIOD, PLANETS.LENGTH_OF_DAY,
-                            PLANETS.DISTANCE_FROM_SUN, PLANETS.PERIHELION, PLANETS.APHELION, PLANETS.ORBITAL_PERIOD,
-                            PLANETS.ORBITAL_VELOCITY, PLANETS.ORBITAL_INCLINATION, PLANETS.ORBITAL_ECCENTRICITY,
-                            PLANETS.OBLIQUITY_TO_ORBIT, PLANETS.MEAN_TEMPERATURE, PLANETS.SURFACE_PRESSURE,
-                            PLANETS.NUMBER_OF_MOONS, PLANETS.HAS_RING_SYSTEM, PLANETS.HAS_GLOBAL_MAGNETIC_FIELD)
+                    .insertInto(PLANET,
+                            PLANET.NAME, PLANET.MASS, PLANET.DIAMETER, PLANET.DENSITY, PLANET.GRAVITY,
+                            PLANET.ESCAPE_VELOCITY, PLANET.ROTATION_PERIOD, PLANET.LENGTH_OF_DAY,
+                            PLANET.DISTANCE_FROM_SUN, PLANET.PERIHELION, PLANET.APHELION, PLANET.ORBITAL_PERIOD,
+                            PLANET.ORBITAL_VELOCITY, PLANET.ORBITAL_INCLINATION, PLANET.ORBITAL_ECCENTRICITY,
+                            PLANET.OBLIQUITY_TO_ORBIT, PLANET.MEAN_TEMPERATURE, PLANET.SURFACE_PRESSURE,
+                            PLANET.NUMBER_OF_MOONS, PLANET.HAS_RING_SYSTEM, PLANET.HAS_GLOBAL_MAGNETIC_FIELD)
                     .values(planetLine[0], toBD(planetLine[1]), toBD(planetLine[2]), toBD(planetLine[3]),
                             toBD(planetLine[4]), toBD(planetLine[5]), toBD(planetLine[6]), toBD(planetLine[7]),
                             toBD(planetLine[8]), toBD(planetLine[9]), toBD(planetLine[10]), toBD(planetLine[11]),

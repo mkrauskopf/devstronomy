@@ -4,7 +4,7 @@
 package com.devstronomy.jooq.generated;
 
 
-import com.devstronomy.jooq.generated.tables.Planets;
+import com.devstronomy.jooq.generated.tables.Planet;
 
 import javax.annotation.Generated;
 
@@ -30,13 +30,13 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index PLANETS_PRIMARY = Indexes0.PLANETS_PRIMARY;
+    public static final Index PLANET_PRIMARY = Indexes0.PLANET_PRIMARY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index PLANETS_PRIMARY = Internal.createIndex("PRIMARY", Planets.PLANETS, new OrderField[] { Planets.PLANETS.ID }, true);
+        public static Index PLANET_PRIMARY = Internal.createIndex("PRIMARY", Planet.PLANET, new OrderField[] { Planet.PLANET.ID }, true);
     }
 }

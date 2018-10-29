@@ -4,8 +4,8 @@
 package com.devstronomy.jooq.generated;
 
 
-import com.devstronomy.jooq.generated.tables.Planets;
-import com.devstronomy.jooq.generated.tables.records.PlanetsRecord;
+import com.devstronomy.jooq.generated.tables.Planet;
+import com.devstronomy.jooq.generated.tables.records.PlanetRecord;
 
 import javax.annotation.Generated;
 
@@ -32,13 +32,13 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
-    public static final Identity<PlanetsRecord, Integer> IDENTITY_PLANETS = Identities0.IDENTITY_PLANETS;
+    public static final Identity<PlanetRecord, Integer> IDENTITY_PLANET = Identities0.IDENTITY_PLANET;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<PlanetsRecord> KEY_PLANETS_PRIMARY = UniqueKeys0.KEY_PLANETS_PRIMARY;
+    public static final UniqueKey<PlanetRecord> KEY_PLANET_PRIMARY = UniqueKeys0.KEY_PLANET_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -50,10 +50,10 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 {
-        public static Identity<PlanetsRecord, Integer> IDENTITY_PLANETS = Internal.createIdentity(Planets.PLANETS, Planets.PLANETS.ID);
+        public static Identity<PlanetRecord, Integer> IDENTITY_PLANET = Internal.createIdentity(Planet.PLANET, Planet.PLANET.ID);
     }
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<PlanetsRecord> KEY_PLANETS_PRIMARY = Internal.createUniqueKey(Planets.PLANETS, "KEY_planets_PRIMARY", Planets.PLANETS.ID);
+        public static final UniqueKey<PlanetRecord> KEY_PLANET_PRIMARY = Internal.createUniqueKey(Planet.PLANET, "KEY_planet_PRIMARY", Planet.PLANET.ID);
     }
 }

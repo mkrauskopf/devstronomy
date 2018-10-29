@@ -2,9 +2,9 @@ CREATE DATABASE devstronomy;
 
 USE devstronomy;
 
-CREATE TABLE planets (
+CREATE TABLE planet (
   id int NOT NULL AUTO_INCREMENT,
-  planet VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   mass DECIMAL(16,6) NOT NULL,
   diameter DECIMAL(16,6) NOT NULL,
   density DECIMAL(16,6) NOT NULL,
