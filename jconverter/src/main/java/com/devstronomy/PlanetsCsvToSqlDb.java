@@ -22,7 +22,7 @@ import static com.devstronomy.jooq.generated.Tables.PLANET;
  */
 final class PlanetsCsvToSqlDb {
 
-    private static final String PLANETS_CSV_PATH = "data/planets.csv";
+    private static final String PLANETS_CSV_PATH = "../data/planets.csv";
 
     // TODO: do not hardcode DB URL and credentials
     private static final String DB_USER_NAME = "root";
