@@ -5,6 +5,7 @@ package com.devstronomy.jooq.generated;
 
 
 import com.devstronomy.jooq.generated.tables.Planet;
+import com.devstronomy.jooq.generated.tables.Satellite;
 
 import javax.annotation.Generated;
 
@@ -31,6 +32,8 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     public static final Index PLANET_PRIMARY = Indexes0.PLANET_PRIMARY;
+    public static final Index SATELLITE_PLANET_ID = Indexes0.SATELLITE_PLANET_ID;
+    public static final Index SATELLITE_PRIMARY = Indexes0.SATELLITE_PRIMARY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -38,5 +41,7 @@ public class Indexes {
 
     private static class Indexes0 {
         public static Index PLANET_PRIMARY = Internal.createIndex("PRIMARY", Planet.PLANET, new OrderField[] { Planet.PLANET.ID }, true);
+        public static Index SATELLITE_PLANET_ID = Internal.createIndex("planet_id", Satellite.SATELLITE, new OrderField[] { Satellite.SATELLITE.PLANET_ID }, false);
+        public static Index SATELLITE_PRIMARY = Internal.createIndex("PRIMARY", Satellite.SATELLITE, new OrderField[] { Satellite.SATELLITE.ID }, true);
     }
 }

@@ -5,6 +5,7 @@ package com.devstronomy.jooq.generated;
 
 
 import com.devstronomy.jooq.generated.tables.Planet;
+import com.devstronomy.jooq.generated.tables.Satellite;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Devstronomy extends SchemaImpl {
 
-    private static final long serialVersionUID = -256522513;
+    private static final long serialVersionUID = 384617400;
 
     /**
      * The reference instance of <code>devstronomy</code>
@@ -41,6 +42,11 @@ public class Devstronomy extends SchemaImpl {
      * The table <code>devstronomy.planet</code>.
      */
     public final Planet PLANET = com.devstronomy.jooq.generated.tables.Planet.PLANET;
+
+    /**
+     * The table <code>devstronomy.satellite</code>.
+     */
+    public final Satellite SATELLITE = com.devstronomy.jooq.generated.tables.Satellite.SATELLITE;
 
     /**
      * No further instances allowed
@@ -67,6 +73,7 @@ public class Devstronomy extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            Planet.PLANET);
+            Planet.PLANET,
+            Satellite.SATELLITE);
     }
 }

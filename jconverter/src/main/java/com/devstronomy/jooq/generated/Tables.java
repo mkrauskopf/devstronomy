@@ -5,6 +5,7 @@ package com.devstronomy.jooq.generated;
 
 
 import com.devstronomy.jooq.generated.tables.Planet;
+import com.devstronomy.jooq.generated.tables.Satellite;
 
 import javax.annotation.Generated;
 
@@ -26,4 +27,9 @@ public class Tables {
      * The table <code>devstronomy.planet</code>.
      */
     public static final Planet PLANET = com.devstronomy.jooq.generated.tables.Planet.PLANET;
+
+    /**
+     * The table <code>devstronomy.satellite</code>.
+     */
+    public static final Satellite SATELLITE = com.devstronomy.jooq.generated.tables.Satellite.SATELLITE;
 }

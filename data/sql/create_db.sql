@@ -3,7 +3,7 @@ CREATE DATABASE devstronomy;
 USE devstronomy;
 
 CREATE TABLE planet (
-  id int NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   mass DECIMAL(16,6) NOT NULL,
   diameter DECIMAL(16,6) NOT NULL,
@@ -26,4 +26,19 @@ CREATE TABLE planet (
   has_ring_system BOOLEAN NOT NULL,
   has_global_magnetic_field BOOLEAN NOT NULL,
   PRIMARY KEY (id)
+);
+
+CREATE TABLE satellite (
+  id INT NOT NULL AUTO_INCREMENT,
+  planet_id INT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  gm DECIMAL(16,6) NOT NULL,
+  radius DECIMAL(16,6) NOT NULL,
+  density DECIMAL(16,6) NULL,
+  magnitude DECIMAL(16,6) NULL,
+  albedo DECIMAL(16,6) NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (planet_id)
+    REFERENCES planet(id)
+    ON DELETE CASCADE
 );
