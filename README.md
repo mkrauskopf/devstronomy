@@ -4,6 +4,10 @@
    1. [Planets](#planets)
    2. [Planetary Satellites](#satellites)
 3. [SQL Dataset](#sql)
+   1. [Examples](#sql-examples)
+      1. [Ten largest moons of Saturn](#ten-moons-saturn)
+      2. [Planets ordered by eccentricity](#planets-ecc)
+   2. [Implementation](#sql-impl)
 
 
 # Description
@@ -90,8 +94,10 @@ from Jet Propulsion Laboratory. See the JPL site for more details about the data
 The [`devstronomy.sql`](data/sql/devstronomy.sql) creates tables for planets and their satellites and fill them with
 data from the CSV files [described above](#csv).
 
+<a name="sql-examples"></a>
 ## Examples
 
+<a name="ten-moons-saturn"></a>
 ### Information about ten largest moons of Saturn
 
 ```sql
@@ -115,6 +121,26 @@ SELECT s.name, s.radius, s.density, s.albedo FROM satellite AS s
 | Phoebe    |  106.500000 | 1.638000 | 0.081000 |
 | Janus     |   89.500000 | 0.630000 | 0.710000 |
 
+<a name="planets-ecc"></a>
+### Planets ordered by eccentricity
+
+```sql
+SELECT name, orbital_eccentricity FROM planet ORDER BY orbital_eccentricity;
+```
+
+| name    | orbital_eccentricity |
+|---------|---------------------:|
+| Venus   |             0.007000 |
+| Neptune |             0.011000 |
+| Earth   |             0.017000 |
+| Uranus  |             0.046000 |
+| Jupiter |             0.049000 |
+| Saturn  |             0.057000 |
+| Mars    |             0.094000 |
+| Mercury |             0.205000 |
+| Pluto   |             0.244000 |
+
+<a name="sql-impl"></a>
 ## Implementation
 The data are converted from CSV files to SQL schema with the [JConverter tool](jconverter). The final `devstronomy.sql`
 SQL dump is then created via `mysqldump`:
