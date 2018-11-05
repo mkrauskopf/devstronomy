@@ -1,3 +1,7 @@
+-- Prepares empty 'devstronomy' database.
+--
+-- 'jconverter' tool currently depends on the empty database being prepared.
+
 CREATE DATABASE devstronomy;
 
 USE devstronomy;
