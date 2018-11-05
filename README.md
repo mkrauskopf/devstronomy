@@ -90,10 +90,35 @@ from Jet Propulsion Laboratory. See the JPL site for more details about the data
 The [`devstronomy.sql`](data/sql/devstronomy.sql) creates tables for planets and their satellites and fill them with
 data from the CSV files [described above](#csv).
 
+## Examples
+
+### Information about ten largest moons of Saturn
+
+```sql
+SELECT s.name, s.radius, s.density, s.albedo FROM satellite AS s
+    LEFT JOIN planet as p ON p.id = s.planet_id
+    WHERE p.name = 'Saturn'
+    ORDER BY s.radius DESC
+    LIMIT 10
+```
+
+| name      | radius      | density  | albedo   |
+|-----------|------------:| --------:| --------:|
+| Titan     | 2574.730000 | 1.882000 | 0.200000 |
+| Rhea      |  764.300000 | 1.233000 | 0.949000 |
+| Iapetus   |  735.600000 | 1.083000 | 0.600000 |
+| Dione     |  561.700000 | 1.476000 | 0.998000 |
+| Tethys    |  533.000000 | 0.973000 | 1.229000 |
+| Enceladus |  252.100000 | 1.608000 | 1.375000 |
+| Mimas     |  198.200000 | 1.150000 | 0.962000 |
+| Hyperion  |  135.000000 | 0.544000 | 0.300000 |
+| Phoebe    |  106.500000 | 1.638000 | 0.081000 |
+| Janus     |   89.500000 | 0.630000 | 0.710000 |
+
 ## Implementation
 The data are converted from CSV files to SQL schema with the [JConverter tool](jconverter). The final `devstronomy.sql`
 SQL dump is then created via `mysqldump`:
 
-```sql
+```bash
 mysqldump -u [uname] -p[pass] devstronomy > devstronomy.sql
 ```
