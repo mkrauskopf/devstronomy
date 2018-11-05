@@ -7,6 +7,7 @@
    1. [Examples](#sql-examples)
       1. [Ten largest moons of Saturn](#ten-moons-saturn)
       2. [Planets ordered by eccentricity](#planets-ecc)
+      3. [Inconsistency in the number of moons](#moons-inconsistency)
    2. [Implementation](#sql-impl)
 
 
@@ -139,6 +140,31 @@ SELECT name, orbital_eccentricity FROM planet ORDER BY orbital_eccentricity;
 | Mars    |             0.094000 |
 | Mercury |             0.205000 |
 | Pluto   |             0.244000 |
+
+<a name="moons-inconsistency"></a>
+### Inconsistency in the number of moons
+
+Note: the `planet.number_of_moons` does not reflect the number of records in the `satellite` table for Jupiter and
+Saturn. See the SQL select below. (_TODO_: why)
+
+```sql
+SELECT name, number_of_moons,
+       (SELECT COUNT(*) FROM satellite s WHERE p.id = s.planet_id) moons_in_table
+    FROM planet p;
+```
+
+| name    | number_of_moons | moons_in_table |
+|---------|----------------:|---------------:|
+| Mercury |               0 |              0 |
+| Venus   |               0 |              0 |
+| Earth   |               1 |              1 |
+| Mars    |               2 |              2 |
+| **Jupiter** |      **79** |         **67** |
+| **Saturn**  |      **62** |         **61** |
+| Uranus  |              27 |             27 |
+| Neptune |              14 |             14 |
+| Pluto   |               5 |              5 |
+
 
 <a name="sql-impl"></a>
 ## Implementation
