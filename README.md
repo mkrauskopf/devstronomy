@@ -95,6 +95,13 @@ from Jet Propulsion Laboratory. See the JPL site for more details about the data
 The [`devstronomy.sql`](data/sql/devstronomy.sql) creates tables for planets and their satellites and fill them with
 data from the CSV files [described above](#csv).
 
+For example for MySQL database following commands will create the database:
+
+```shell
+mysqladmin -u [uname] -p[pass] create devstronomy
+mysql -u [uname] -p[pass] devstronomy < data/sql/devstronomy.sql
+```
+
 <a name="sql-examples"></a>
 ## Examples
 
@@ -171,6 +178,6 @@ SELECT name, number_of_moons,
 The data are converted from CSV files to SQL schema with the [JConverter tool](jconverter). The final `devstronomy.sql`
 SQL dump is then created via `mysqldump`:
 
-```bash
-mysqldump -u [uname] -p[pass] devstronomy > devstronomy.sql
+```shell
+mysqldump -u [uname] -p[pass] devstronomy > data/sql/devstronomy.sql
 ```
