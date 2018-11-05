@@ -1,8 +1,9 @@
 # Table of Contents
 1. [Description](#Description)
-2. [Datasets](#Datasets)
+2. [CSV files](#csv)
    1. [Planets](#planets)
-   2. [Planetary satellites](#satellites)
+   2. [Planetary Satellites](#satellites)
+3. [SQL Dataset](#sql)
 
 
 # Description
@@ -11,11 +12,17 @@ happen to be amateur astronomers. I am myself in such a situation and has not be
 by this project in an accessible format.
 
 
-# Datasets
+<a name="csv"></a>
+# CSV (comma-separated values) files
 <a name="planets"></a>
-## Planets
+1. [Planets CSV](#planets)
+2. [Planetary Satellites CSV](#satellites)
 
-The [`planets.csv`](data/planets.csv) file contains information about planets in our Solar System including dwarf planet Pluto.
+
+### Planets
+
+The [`planets.csv`](data/planets.csv) file contains information about planets in our Solar System including dwarf
+planet Pluto.
  
 ### Variables in the file and their units
 
@@ -60,8 +67,8 @@ p.T.to_csv('planets.csv', header=False)
 <a name="satellites"></a>
 ## Planetary satellites (moons) 
 
-The [`satellites.csv`](data/satellites.csv) file contains information about planetary satellites (moons) of planets in our Solar System. Moons
-of dwarf planet Pluto are included as well.
+The [`satellites.csv`](data/satellites.csv) file contains information about planetary satellites (moons) of planets in
+our Solar System. Moons of dwarf planet Pluto are included as well.
 
 ### Variables in the file and their units
 
@@ -77,3 +84,16 @@ of dwarf planet Pluto are included as well.
 
 The source of data for the `sattelites.csv` is [Planetary Satellite Physical Parameters](https://ssd.jpl.nasa.gov/?sat_phys_par)
 from Jet Propulsion Laboratory. See the JPL site for more details about the data.
+
+<a name="sql"></a>
+# SQL Dataset
+The [`devstronomy.sql`](data/sql/devstronomy.sql) creates tables for planets and their satellites and fill them with
+data from the CSV files [described above](#csv).
+
+## Implementation
+The data are converted from CSV files to SQL schema with the [JConverter tool](jconverter). The final `devstronomy.sql`
+SQL dump is then created via `mysqldump`:
+
+```sql
+mysqldump -u [uname] -p[pass] devstronomy > devstronomy.sql`
+```
