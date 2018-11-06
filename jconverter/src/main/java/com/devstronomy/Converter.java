@@ -1,20 +1,22 @@
 package com.devstronomy;
 
-import com.devstronomy.jooq.generated.tables.records.PlanetRecord;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.Reader;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +26,10 @@ import static com.devstronomy.jooq.generated.Tables.SATELLITE;
 /**
  * Reads data from planets CSV file and insert them into the SQL database.
  */
-final class Converter {
+@Component
+final class Converter implements CommandLineRunner {
+
+    private static Logger LOG = LoggerFactory.getLogger(Converter.class);
 
     // TODO: do not paths.
     private static final String PLANETS_CSV_PATH = "../data/planets.csv";
@@ -32,12 +37,13 @@ final class Converter {
 
     private final DSLContext jooqDslContext;
 
-    public static void doConversion(Connection conn) {
-        new Converter(conn).convert();
+    private Converter(DataSource dataSource) {
+        jooqDslContext = DSL.using(dataSource, SQLDialect.MYSQL);
     }
 
-    private Converter(Connection conn) {
-        jooqDslContext = DSL.using(conn, SQLDialect.MYSQL);
+    @Override
+    public void run(String... args) {
+        convert();
     }
 
     private void convert() {
@@ -50,11 +56,8 @@ final class Converter {
             for (String[] satelliteLine : prepareCsvReader(SATELLITES_CSV_PATH)) {
                 insertSatelliteIntoDb(satelliteLine, planetNameToId);
             }
-        } catch (SQLException e) {
-            System.err.println("Cannot obtain database connection:");
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("Error during converting", e);
         }
     }
 
@@ -66,7 +69,7 @@ final class Converter {
                 .build();
     }
 
-    private Integer insertPlanetIntoDb(String[] planetLine) throws SQLException {
+    private Integer insertPlanetIntoDb(String[] planetLine) {
         // TODO: Try to find a less verbose, yet typesafe, way to insert data with JOOQ.
         return jooqDslContext
                 .insertInto(PLANET,
@@ -87,7 +90,7 @@ final class Converter {
                 .get(PLANET.ID);
     }
 
-    private void insertSatelliteIntoDb(String[] satellite, Map<String, Integer> planetNameToId) throws SQLException {
+    private void insertSatelliteIntoDb(String[] satellite, Map<String, Integer> planetNameToId) {
         // TODO: Try to find a less verbose, yet typesafe, way to insert data with JOOQ.
         String parentPlanet = satellite[0];
         Integer planetId = planetNameToId.get(parentPlanet);
@@ -113,14 +116,14 @@ final class Converter {
         int plusMinusIdx = str.indexOf('±');
         if (plusMinusIdx != -1) {
             BigDecimal result = toBD(str.substring(0, plusMinusIdx));
-            System.out.printf("INFO: Coercing '%s' to '%s'\n", str, result);
+            LOG.info("Coercing '{}' to '{}'", str, result);
             return result;
         }
 
         // TODO: Handle differences. Do not lose the information!
         if (str.endsWith("R") || str.endsWith("r") || str.endsWith("V")) {
             BigDecimal result = toBD(str.substring(0, str.length() - 1));
-            System.out.printf("WARN: Coercing '%s' to '%s' (to be fixed)\n", str, result);
+            LOG.warn("Coercing '{}' to '{}' (to be fixed)", str, result);
             return result;
         }
 
