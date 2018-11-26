@@ -1,0 +1,45 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+description = "Devstronomy server"
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+
+    // Spring
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    runtime 'org.springframework.boot:spring-boot-devtools'
+
+    compile 'mysql:mysql-connector-java'
+    compile 'org.projectlombok:lombok:1.+'
+
+    // Tests
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.+'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.+'
+    
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,3 @@
+rootProject.name = 'server'
+
+enableFeaturePreview('IMPROVED_POM_SUPPORT')
