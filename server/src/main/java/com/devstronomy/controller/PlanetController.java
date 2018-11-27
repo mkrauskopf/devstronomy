@@ -4,15 +4,14 @@ import com.devstronomy.model.Planet;
 import com.devstronomy.repository.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/planet")
+@CrossOrigin(origins = "http://localhost:3000")
+// TODO: Remove CrossOrigin hack which just eases the frontend development for now.
 public class PlanetController {
 
     @Autowired
