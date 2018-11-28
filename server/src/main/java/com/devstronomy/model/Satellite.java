@@ -1,5 +1,6 @@
 package com.devstronomy.model;
 
+import com.google.common.base.MoreObjects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -73,6 +74,20 @@ public final class Satellite {
 
     public Double getAlbedo() {
         return albedo;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("id", id)
+                .add("planetId", planetId)
+                .add("name", name)
+                .add("gm", gm)
+                .add("radius", radius)
+                .add("density", density)
+                .add("magnitude", magnitude)
+                .add("albedo", albedo)
+                .toString();
     }
 
 }

@@ -31,6 +31,7 @@ dependencies {
     runtime 'org.springframework.boot:spring-boot-devtools'
 
     compile 'mysql:mysql-connector-java'
+    compile 'com.google.guava:guava:27.0-jre'
     compile 'org.projectlombok:lombok:1.+'
 
     // Tests
