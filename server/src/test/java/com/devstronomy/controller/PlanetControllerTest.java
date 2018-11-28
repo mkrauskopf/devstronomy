@@ -1,6 +1,7 @@
 package com.devstronomy.controller;
 
 import com.devstronomy.model.Planet;
+import com.devstronomy.model.Satellite;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,15 @@ class PlanetControllerTest {
         assertThat(allPlanets).hasSize(9);
         ResponseEntity<Planet> earth = planetController.getPlanetById(3l);
         assertEquals(earth.getStatusCode(), HttpStatus.OK);
+    }
+
+    @Test
+    public void findSatellitesByPlanetId() {
+        ResponseEntity<List<Satellite>> response = planetController.findSatellitesByPlanetId(4);
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        List<Satellite> marsSatellites = response.getBody();
+        System.out.println("marsSatellites = " + marsSatellites);
+        assertThat(marsSatellites).as("two Mars satellites").hasSize(2);
     }
 
 }
