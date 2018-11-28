@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
 import Planet from './Planet'
+import Satellites from './Satellites'
 import './responsive.css';
 
 class Planets extends Component {
 
   state = {
-    planets: []
+    planets: [],
+    selectedPlanet: null,
+    satellites: []
+  }
+
+  showMoons = (planet) => {
+    fetch('http://localhost:8080/planet/' + planet.id + '/satellites')
+      .then(results => {
+        return results.json();
+      }).then(data => {
+        this.setState({
+          satellites: data,
+          selectedPlanet: planet.name
+        })
+      })
   }
 
   render() {
     return (
       <div>
         <h2>Planets of our Solar System</h2>
+
         <table className="rwd-table">
           <thead>
             <tr>
@@ -41,11 +57,14 @@ class Planets extends Component {
           <tbody>
           {
             this.state.planets.map(planet => {
-              return <Planet key={planet.id} planet={planet}/>
+              return <Planet selectPlanet={() => this.showMoons(planet)} key={planet.id} planet={planet}/>
             })
           }
           </tbody>
         </table>
+
+        <Satellites planetName={this.state.selectedPlanet} satellites={this.state.satellites} />
+
       </div>
     )
   }
@@ -57,6 +76,15 @@ class Planets extends Component {
       }).then(data => {
         this.setState({
           planets: data
+        })
+      })
+    fetch('http://localhost:8080/satellite/')
+      .then(results => {
+        return results.json();
+      }).then(data => {
+        this.setState({
+          satellites: data,
+          selectedPlanet: "all planets"
         })
       })
   }

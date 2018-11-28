@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Planets from './planets/Planets';
+import Planets from './components/Planets';
 import './App.css';
 
 class App extends Component {
