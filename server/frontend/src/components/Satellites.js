@@ -2,9 +2,12 @@ import React from 'react';
 import './responsive.css';
 
 const Satellites = (props) => {
-  return (
+  if (props.satellites.length === 0) {
+    return <h2>Planet <i>{props.planetName}</i> does not have any satellites.</h2>
+  } else { // render table with satellites
+    return(
       <div>
-        <h2>Satellites of {props.planetName}</h2>
+        <h2>Satellites of <i>{props.planetName}</i></h2>
 
         <table className="rwd-table">
           <thead>
@@ -34,7 +37,8 @@ const Satellites = (props) => {
         </table>
 
       </div>
-  )
+    )
+  }
 }
 
 export default Satellites
