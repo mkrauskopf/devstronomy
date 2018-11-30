@@ -1,0 +1,4 @@
+I was unable to affect some properties of react-virtualized components. So
+until I'm able to solve this correctly (overriding default in the styles.css) I
+will go with the copy-paste of the official styles. It is one of the suggested
+ways by the react-virtualized project.

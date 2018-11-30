@@ -5,13 +5,19 @@
   "dependencies": {
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "react-virtualized": "^9.21.0"
+  },
+  "devDependencies": {
+    "less-watch-compiler": "^1.13.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-css": "less-watch-compiler --run-once src/less src/css",
+    "watch-css": "npm run build-css && less-watch-compiler src/less src/css"
   },
   "eslintConfig": {
     "extends": "react-app"
