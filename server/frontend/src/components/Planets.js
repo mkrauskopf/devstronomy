@@ -43,6 +43,7 @@ class Planets extends Component {
                rowCount={this.state.planets.length}
                rowGetter={({ index }) => this.state.planets[index]}
                rowClassName={this._rowClassName}
+               onRowClick={(props) => this.showMoons(props.rowData)}
                >
           <Column label='Name' dataKey='name' width={80} />
           <Column label='Mass' dataKey='mass' width={80} />
