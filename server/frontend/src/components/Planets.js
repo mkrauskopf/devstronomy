@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Satellites from './Satellites'
-import '../css-react-virtualized/styles.css'; // only needs to be imported once
-import '../css/components/style.css';
 import { Column, Table } from 'react-virtualized';
+
+// styles
+import '../css-react-virtualized/styles.css'; // only needs to be imported once
+import '../css/components/table.css';
 
 class Planets extends Component {
 
