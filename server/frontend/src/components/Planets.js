@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import Planet from './Planet'
 import Satellites from './Satellites'
-import './responsive.css';
+import { Column, Table } from 'react-virtualized';
+
+// styles
+import '../css-react-virtualized/styles.css'; // only needs to be imported once
+import '../css/components/table.css';
 
 class Planets extends Component {
 
@@ -23,45 +26,49 @@ class Planets extends Component {
       })
   }
 
+  _rowClassName = ({index}) => {
+    if (index % 2 === 0) {
+      return "oddRow";
+    }
+  }
+
   render() {
     return (
       <div>
+
         <h2>Planets of our Solar System</h2>
 
-        <table className="rwd-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Mass</th>
-              <th>Diameter</th>
-              <th>Density</th>
-              <th>Gravity</th>
-              <th>Escape Velocity</th>
-              <th>Rotation Period</th>
-              <th>Length Of Day</th>
-              <th>Distance From Sun</th>
-              <th>Perihelion</th>
-              <th>Aphelion</th>
-              <th>Orbital Period</th>
-              <th>Orbital Velocity</th>
-              <th>Orbital Inclination</th>
-              <th>Orbital Eccentricity</th>
-              <th>Obliquity To Orbit</th>
-              <th>Mean Temperature</th>
-              <th>Surface Pressure</th>
-              <th>Number Of Moons</th>
-              <th>Has Ring System</th>
-              <th>Has Global Magnetic Field</th>
-            </tr>
-          </thead>
-          <tbody>
-          {
-            this.state.planets.map(planet => {
-              return <Planet selectPlanet={() => this.showMoons(planet)} key={planet.id} planet={planet}/>
-            })
-          }
-          </tbody>
-        </table>
+        <Table width={2050}
+               height={450}
+               headerHeight={90}
+               rowHeight={40}
+               rowCount={this.state.planets.length}
+               rowGetter={({ index }) => this.state.planets[index]}
+               rowClassName={this._rowClassName}
+               onRowClick={(props) => this.showMoons(props.rowData)}
+               >
+          <Column label='Name' dataKey='name' width={80} />
+          <Column label='Mass' dataKey='mass' width={80} />
+          <Column label='Diameter' dataKey='diameter' width={100} />
+          <Column label='Density' dataKey='density' width={80} />
+          <Column label='Gravity' dataKey='gravity' width={80} />
+          <Column label='Escape Velocity' dataKey='escapeVelocity' width={80} />
+          <Column label='Rotation Period' dataKey='rotationPeriod' width={80} />
+          <Column label='Length Of Day' dataKey='lengthOfDay' width={80} />
+          <Column label='Distance From Sun' dataKey='distanceFromSun' width={80} />
+          <Column label='Perihelion' dataKey='perihelion' width={100} />
+          <Column label='Aphelion' dataKey='aphelion' width={90} />
+          <Column label='Orbital Period' dataKey='orbitalPeriod' width={70} />
+          <Column label='Orbital Velocity' dataKey='orbitalVelocity' width={80} />
+          <Column label='Orbital Inclination' dataKey='orbitalInclination' width={100} />
+          <Column label='Orbital Eccentricity' dataKey='orbitalEccentricity' width={100} />
+          <Column label='Obliquity To Orbit' dataKey='obliquityToOrbit' width={80} />
+          <Column label='Mean Temperature' dataKey='meanTemperature' width={115} />
+          <Column label='Surface Pressure' dataKey='surfacePressure' width={80} />
+          <Column label='Number Of Moons' dataKey='numberOfMoons' width={70} />
+          <Column label='Has Ring System' dataKey='hasRingSystem' width={80} />
+          <Column label='Has Global Magnetic Field' dataKey='hasGlobalMagneticField' width={80} />
+        </Table>
 
         <Satellites planetName={this.state.selectedPlanet} satellites={this.state.satellites} />
 
