@@ -21,6 +21,17 @@
   background: #34495E;
 }
 
+/** Always show scrollbar. */
+.ReactVirtualized__Table__Grid::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+}
+.ReactVirtualized__Table__Grid::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
 .ReactVirtualized__Table__headerColumn {
   .column();
 }
