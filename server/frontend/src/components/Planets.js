@@ -24,6 +24,12 @@ class Planets extends Component {
       })
   }
 
+  _rowClassName = ({index}) => {
+    if (index % 2 === 0) {
+      return "oddRow";
+    }
+  }
+
   render() {
     return (
       <div>
@@ -36,6 +42,7 @@ class Planets extends Component {
                rowHeight={40}
                rowCount={this.state.planets.length}
                rowGetter={({ index }) => this.state.planets[index]}
+               rowClassName={this._rowClassName}
                >
           <Column label='Name' dataKey='name' width={80} />
           <Column label='Mass' dataKey='mass' width={80} />
