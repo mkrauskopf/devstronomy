@@ -10,11 +10,14 @@ const Satellites = (props) => {
   }
 
   if (props.satellites.length === 0) {
-    return <h2>Planet <i>{props.planetName}</i> does not have any satellites.</h2>
+    return <h2>Planet <span className='highlight'>{props.planetName}</span> does not have any satellites.</h2>
   } else { // render table with satellites
+    const planetText = props.planetName === null
+      ? <span>all planets</span>
+      : <span>planet <span className='highlight'>{props.planetName}</span></span>
     return(
       <div>
-        <h2>Satellites of <i>{props.planetName}</i></h2>
+        <h2>Satellites of {planetText}</h2>
 
         <Table width={515}
                height={514}

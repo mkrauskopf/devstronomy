@@ -91,7 +91,7 @@ class Planets extends Component {
       }).then(data => {
         this.setState({
           satellites: data,
-          selectedPlanet: "all planets"
+          selectedPlanet: null
         })
       })
   }
