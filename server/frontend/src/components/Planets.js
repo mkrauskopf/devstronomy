@@ -21,12 +21,15 @@ class Planets extends Component {
       }).then(data => {
         this.setState({
           satellites: data,
-          selectedPlanet: planet.name
+          selectedPlanet: planet
         })
       })
   }
 
   _rowClassName = ({index}) => {
+    if (this.state.selectedPlanet === this.state.planets[index]) {
+      return "selectedRow";
+    }
     if (index % 2 === 0) {
       return "oddRow";
     }
@@ -70,7 +73,7 @@ class Planets extends Component {
           <Column label='Has Global Magnetic Field' dataKey='hasGlobalMagneticField' width={80} className='text' />
         </Table>
 
-        <Satellites planetName={this.state.selectedPlanet} satellites={this.state.satellites} />
+        <Satellites planet={this.state.selectedPlanet} satellites={this.state.satellites} />
 
       </div>
     )
