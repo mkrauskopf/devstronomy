@@ -15,6 +15,9 @@ class Planets extends Component {
   }
 
   showMoons = (planet) => {
+    if (planet === this.state.selectedPlanet) {
+      this.loadAllSatellites();
+    }
     fetch('http://localhost:8080/planet/' + planet.id + '/satellites')
       .then(results => {
         return results.json();
@@ -90,6 +93,10 @@ class Planets extends Component {
           planets: data
         })
       })
+    this.loadAllSatellites();
+  }
+
+  loadAllSatellites = () => {
     fetch('http://localhost:8080/satellite/')
       .then(results => {
         return results.json();
