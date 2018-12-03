@@ -26,7 +26,7 @@ by this project in an accessible format.
 
 ### Planets
 
-The [`planets.csv`](data/planets.csv) file contains information about planets in our Solar System including dwarf
+The [`planets.csv`](data/csv/planets.csv) file contains information about planets in our Solar System including dwarf
 planet Pluto.
 
 ### Variables in the file and their units
@@ -72,8 +72,8 @@ p.T.to_csv('planets.csv', header=False)
 <a name="satellites"></a>
 ## Planetary satellites (moons)
 
-The [`satellites.csv`](data/satellites.csv) file contains information about planetary satellites (moons) of planets in
-our Solar System. Moons of dwarf planet Pluto are included as well.
+The [`satellites.csv`](data/csv/satellites.csv) file contains information about planetary satellites (moons) of planets
+in our Solar System. Moons of dwarf planet Pluto are included as well.
 
 ### Variables in the file and their units
 
