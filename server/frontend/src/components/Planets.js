@@ -51,6 +51,7 @@ class Planets extends Component {
                onRowClick={(props) => this.showMoons(props.rowData)}
                >
           <Column label='Name' dataKey='name' width={70} className='text' />
+          <Column label='Moons' dataKey='numberOfMoons' width={70} />
           <Column label='Mass' dataKey='mass' width={70} />
           <Column label='Diameter' dataKey='diameter' width={90} />
           <Column label='Density' dataKey='density' width={70} />
@@ -68,7 +69,6 @@ class Planets extends Component {
           <Column label='Obliquity To Orbit' dataKey='obliquityToOrbit' width={80} />
           <Column label='Mean Temperature' dataKey='meanTemperature' width={115} />
           <Column label='Surface Pressure' dataKey='surfacePressure' width={80} />
-          <Column label='Number Of Moons' dataKey='numberOfMoons' width={70} />
         </Table>
 
         <Satellites planet={this.state.selectedPlanet} satellites={this.state.satellites} />
