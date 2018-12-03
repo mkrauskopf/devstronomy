@@ -41,7 +41,7 @@ class Planets extends Component {
 
         <h2>Planets of our Solar System</h2>
 
-        <Table width={2050}
+        <Table width={1950}
                height={450}
                headerHeight={90}
                rowHeight={40}
@@ -69,8 +69,6 @@ class Planets extends Component {
           <Column label='Mean Temperature' dataKey='meanTemperature' width={115} />
           <Column label='Surface Pressure' dataKey='surfacePressure' width={80} />
           <Column label='Number Of Moons' dataKey='numberOfMoons' width={70} />
-          <Column label='Has Ring System' dataKey='hasRingSystem' width={80} className='text' />
-          <Column label='Has Global Magnetic Field' dataKey='hasGlobalMagneticField' width={80} className='text' />
         </Table>
 
         <Satellites planet={this.state.selectedPlanet} satellites={this.state.satellites} />
@@ -78,6 +76,10 @@ class Planets extends Component {
       </div>
     )
   }
+
+  // TODO: Put the two columns below back to the table and fix their data.
+  //<Column label='Has Ring System' dataKey='hasRingSystem' width={80} className='text' />
+  //<Column label='Has Global Magnetic Field' dataKey='hasGlobalMagneticField' width={80} className='text' />
 
   componentDidMount() {
     fetch('http://localhost:8080/planet/')
