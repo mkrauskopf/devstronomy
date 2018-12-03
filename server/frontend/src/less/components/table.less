@@ -1,9 +1,8 @@
-@border: 1px solid #44596E;
+@border: 1px solid #24494E;
 
 .column() {
   align-items: center;
   border-right: @border;
-  margin-left: 0x;
   display: flex;
   flex: 1;
   height: 100%;
@@ -34,6 +33,8 @@
 
 .ReactVirtualized__Table__headerColumn {
   .column();
+  justify-content: center;
+  padding-right: 10px;
 }
 
 .ReactVirtualized__Table__headerRow {
@@ -52,8 +53,15 @@
 
 .ReactVirtualized__Table__rowColumn {
   .column();
+  justify-content: flex-end;
+  padding-right: 10px;
 }
 
 .oddRow {
   background: #44596E;
 }
+
+.text {
+  justify-content: flex-start;
+}
+

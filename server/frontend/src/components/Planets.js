@@ -47,11 +47,11 @@ class Planets extends Component {
                rowClassName={this._rowClassName}
                onRowClick={(props) => this.showMoons(props.rowData)}
                >
-          <Column label='Name' dataKey='name' width={80} />
-          <Column label='Mass' dataKey='mass' width={80} />
-          <Column label='Diameter' dataKey='diameter' width={100} />
-          <Column label='Density' dataKey='density' width={80} />
-          <Column label='Gravity' dataKey='gravity' width={80} />
+          <Column label='Name' dataKey='name' width={70} className='text' />
+          <Column label='Mass' dataKey='mass' width={70} />
+          <Column label='Diameter' dataKey='diameter' width={90} />
+          <Column label='Density' dataKey='density' width={70} />
+          <Column label='Gravity' dataKey='gravity' width={70} />
           <Column label='Escape Velocity' dataKey='escapeVelocity' width={80} />
           <Column label='Rotation Period' dataKey='rotationPeriod' width={80} />
           <Column label='Length Of Day' dataKey='lengthOfDay' width={80} />
@@ -66,8 +66,8 @@ class Planets extends Component {
           <Column label='Mean Temperature' dataKey='meanTemperature' width={115} />
           <Column label='Surface Pressure' dataKey='surfacePressure' width={80} />
           <Column label='Number Of Moons' dataKey='numberOfMoons' width={70} />
-          <Column label='Has Ring System' dataKey='hasRingSystem' width={80} />
-          <Column label='Has Global Magnetic Field' dataKey='hasGlobalMagneticField' width={80} />
+          <Column label='Has Ring System' dataKey='hasRingSystem' width={80} className='text' />
+          <Column label='Has Global Magnetic Field' dataKey='hasGlobalMagneticField' width={80} className='text' />
         </Table>
 
         <Satellites planetName={this.state.selectedPlanet} satellites={this.state.satellites} />
