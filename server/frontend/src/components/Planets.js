@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Satellites from './Satellites'
 import { Column, Table } from 'react-virtualized';
+import dataLoader from './data-loader-server.js'
 
 // styles
 import '../css-react-virtualized/styles.css'; // only needs to be imported once
@@ -18,15 +19,12 @@ class Planets extends Component {
     if (planet === this.state.selectedPlanet) {
       this.loadAllSatellites();
     }
-    fetch('http://localhost:8080/planet/' + planet.id + '/satellites')
-      .then(results => {
-        return results.json();
-      }).then(data => {
-        this.setState({
-          satellites: data,
-          selectedPlanet: planet
-        })
+    dataLoader.loadSatellites(planet, data => 
+      this.setState({
+        satellites: data,
+        selectedPlanet: planet
       })
+    );
   }
 
   _rowClassName = ({index}) => {
@@ -85,29 +83,25 @@ class Planets extends Component {
   //<Column label='Has Global Magnetic Field' dataKey='hasGlobalMagneticField' width={80} className='text' />
 
   componentDidMount() {
-    fetch('http://localhost:8080/planet/')
-      .then(results => {
-        return results.json();
-      }).then(data => {
-        this.setState({
-          planets: data
-        })
+    dataLoader.loadAllPlanets(data =>
+      this.setState({
+        planets: data
       })
+    );
+
     this.loadAllSatellites();
   }
 
-  loadAllSatellites = () => {
-    fetch('http://localhost:8080/satellite/')
-      .then(results => {
-        return results.json();
-      }).then(data => {
-        this.setState({
-          satellites: data,
-          selectedPlanet: null
-        })
+  loadAllSatellites() {
+    dataLoader.loadAllSatellites(data =>
+      this.setState({
+        satellites: data,
+        selectedPlanet: null
       })
+    );
   }
 
 }
 
 export default Planets;
+
