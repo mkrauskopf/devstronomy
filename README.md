@@ -3,7 +3,8 @@
 2. [CSV files](#csv)
    1. [Planets](#planets)
    2. [Planetary Satellites](#satellites)
-3. [SQL Dataset](#sql)
+3. [JSON files](#json)
+4. [SQL Dataset](#sql)
    1. [Examples](#sql-examples)
       1. [Ten largest moons of Saturn](#ten-moons-saturn)
       2. [Planets ordered by eccentricity](#planets-ecc)
@@ -89,6 +90,17 @@ in our Solar System. Moons of dwarf planet Pluto are included as well.
 
 The source of data for the `sattelites.csv` is [Planetary Satellite Physical Parameters](https://ssd.jpl.nasa.gov/?sat_phys_par)
 from Jet Propulsion Laboratory. See the JPL site for more details about the data.
+
+
+<a name="json"></a>
+# JSON
+The same content as for [CSV files](#csv) is provided in JSON format.
+
+* [`planets.json`](data/json/planets.json)
+* [`satellites.json`](data/json/satellites.json)
+
+See [CSV section](#csv) for details about the data.
+
 
 <a name="sql"></a>
 # SQL Dataset
