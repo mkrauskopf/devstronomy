@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Satellites from './Satellites'
 import { Column, Table } from 'react-virtualized';
-import dataLoader from './data-loader-server.js'
+import dataLoader from './data-loader-json.js'
 
 // styles
 import '../css-react-virtualized/styles.css'; // only needs to be imported once
@@ -18,13 +18,14 @@ class Planets extends Component {
   showMoons = (planet) => {
     if (planet === this.state.selectedPlanet) {
       this.loadAllSatellites();
+    } else {
+      dataLoader.loadSatellites(planet, data => 
+        this.setState({
+          satellites: data,
+          selectedPlanet: planet
+        })
+      );
     }
-    dataLoader.loadSatellites(planet, data => 
-      this.setState({
-        satellites: data,
-        selectedPlanet: planet
-      })
-    );
   }
 
   _rowClassName = ({index}) => {
