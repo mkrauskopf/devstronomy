@@ -45,7 +45,7 @@ class Planets extends Component {
 
     const showAllButton = selectedPlanet
       ? <span> (<button className='ahref' onClick={() => this.loadAllSatellites()}>show all satellites</button>)</span>
-      : '';
+      : ' (select a planet above to filter satellites)';
 
     const planetSpan = <span className='highlight'>{planetName}</span>
     let satellitesHeader;
