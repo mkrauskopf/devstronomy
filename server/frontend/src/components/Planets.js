@@ -6,6 +6,7 @@ import dataLoader from './data-loader-json.js'
 // styles
 import '../css-react-virtualized/styles.css'; // only needs to be imported once
 import '../css/components/table.css';
+import '../css/components/components.css';
 
 class Planets extends Component {
 
@@ -38,10 +39,29 @@ class Planets extends Component {
   }
 
   render() {
+    const selectedPlanet = this.state.selectedPlanet;
+    const satellites = this.state.satellites;
+    const planetName = selectedPlanet === null ? null : selectedPlanet.name;
+
+    const showAllButton = selectedPlanet
+      ? <span> (<button className='ahref' onClick={() => this.loadAllSatellites()}>show all satellites</button>)</span>
+      : '';
+
+    const planetSpan = <span className='highlight'>{planetName}</span>
+    let satellitesHeader;
+    if (satellites.length === 0) {
+      satellitesHeader = <span>Planet {planetSpan} does not have any satellites</span>
+    } else { // render table with satellites
+      satellitesHeader = planetName === null
+        ? 'Satellites of all planets'
+        : <span>Satellites of planet {planetSpan}</span>
+    }
+    satellitesHeader = <span className='header'>{satellitesHeader}</span>
+
     return (
       <div>
 
-        <h2>Planets of our Solar System</h2>
+        <span className='header'>Planets of our Solar System</span>
 
         <Table width={1950}
                height={450}
@@ -72,6 +92,11 @@ class Planets extends Component {
           <Column label='Mean Temperature' dataKey='meanTemperature' width={115} />
           <Column label='Surface Pressure' dataKey='surfacePressure' width={80} />
         </Table>
+
+        <br/>
+        <div>
+          {satellitesHeader}{showAllButton}
+        </div>
 
         <Satellites planet={this.state.selectedPlanet} satellites={this.state.satellites} />
 
