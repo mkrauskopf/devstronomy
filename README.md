@@ -1,10 +1,11 @@
 # Table of Contents
 1. [Description](#Description)
-2. [CSV files](#csv)
+2. [Demo](#Demo)
+3. [CSV files](#csv)
    1. [Planets](#planets)
    2. [Planetary Satellites](#satellites)
-3. [JSON files](#json)
-4. [SQL Dataset](#sql)
+4. [JSON files](#json)
+5. [SQL Dataset](#sql)
    1. [Examples](#sql-examples)
       1. [Ten largest moons of Saturn](#ten-moons-saturn)
       2. [Planets ordered by eccentricity](#planets-ecc)
@@ -16,6 +17,13 @@
 The _Devstronomy_ project aims to provide datasets related to astronomy in an accessible format for developers who
 happen to be amateur astronomers. I am myself in such a situation and has not been able to find datasets provided
 by this project in an accessible format.
+
+
+# Demo
+To see an interactive demo of the data visit the experimental
+[Devstronomy Homepage](https://mkrauskopf.github.io/devstronomy/).
+
+![Devstronomy demo](/demo.png?raw=true "Devstronomy demo")
 
 
 <a name="csv"></a>
