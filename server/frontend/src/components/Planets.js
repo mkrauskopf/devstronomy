@@ -20,7 +20,7 @@ class Planets extends Component {
     if (planet === this.state.selectedPlanet) {
       this.loadAllSatellites();
     } else {
-      dataLoader.loadSatellites(planet, data => 
+      dataLoader.loadSatellites(planet, data =>
         this.setState({
           satellites: data,
           selectedPlanet: planet
@@ -31,10 +31,10 @@ class Planets extends Component {
 
   _rowClassName = ({index}) => {
     if (this.state.selectedPlanet === this.state.planets[index]) {
-      return "selectedRow";
+      return 'selectedRow';
     }
     if (index % 2 === 0) {
-      return "oddRow";
+      return 'oddRow';
     }
   }
 
