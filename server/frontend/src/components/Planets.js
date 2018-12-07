@@ -100,7 +100,7 @@ class Planets extends Component {
                rowClassName={this._rowClassName}
                onRowClick={(props) => this.showMoons(props.rowData)}
                >
-          <Column label='Name' dataKey='name' width={70} className='text' />
+          <Column label='Name' dataKey='name' width={70} className='main-column' />
           <Column label='Moons' dataKey='numberOfMoons' width={70} />
           <Column label={this.columnHeader('Mass')} dataKey='mass' width={70} />
           <Column label={this.columnHeader('Diameter')} dataKey='diameter' width={90} />

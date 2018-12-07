@@ -18,7 +18,7 @@ const Satellites = (props) => {
            rowGetter={({ index }) => props.satellites[index]}
            rowClassName={_rowClassName}
     >
-      <Column label='Name' dataKey='name' width={105} className='text' />
+      <Column label='Name' dataKey='name' width={105} className='main-column' />
       <Column label='GM' dataKey='gm' width={95} />
       <Column label='Radius' dataKey='radius' width={75} />
       <Column label='Density' dataKey='density' width={75} />
