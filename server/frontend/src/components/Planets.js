@@ -10,6 +10,30 @@ import '../css/components/components.css';
 
 class Planets extends Component {
 
+  // Maps column name to its unit.
+  units = {
+    'Mass': <span>10<sup>24</sup>kg</span>,
+    'Diameter': 'km',
+    'Density': <span>kg/m3</span>,
+    'Gravity': <span>m/s2</span>,
+    'Escape Velocity': 'km/s',
+    'Rotation Period': 'hours',
+    'Length of Day': 'hours',
+    'Distance from Sun': <span>10<sup>6</sup> km</span>,
+    'Perihelion': <span>10<sup>6</sup> km</span>,
+    'Aphelion': <span>10<sup>6</sup> km</span>,
+    'Orbital Period': 'days',
+    'Orbital Velocity': 'km/s',
+    'Orbital Inclination': 'degrees',
+    'Orbital Eccentricity': '',
+    'Obliquity to Orbit': 'degrees',
+    'Mean Temperature': 'C',
+    'Surface Pressure': 'bars',
+    'Number of Moons': 'number',
+    'Ring System?': 'Yes/No',
+    'Global Magnetic Field?': 'Yes/No',
+  }
+
   state = {
     planets: [],
     selectedPlanet: null,
@@ -36,6 +60,10 @@ class Planets extends Component {
     if (index % 2 === 0) {
       return 'oddRow';
     }
+  }
+  
+  columnHeader = column => {
+    return <span>{column}<br/><span className='unit'>({this.units[column]})</span></span>
   }
 
   render() {
@@ -74,23 +102,23 @@ class Planets extends Component {
                >
           <Column label='Name' dataKey='name' width={70} className='text' />
           <Column label='Moons' dataKey='numberOfMoons' width={70} />
-          <Column label='Mass' dataKey='mass' width={70} />
-          <Column label='Diameter' dataKey='diameter' width={90} />
-          <Column label='Density' dataKey='density' width={70} />
-          <Column label='Gravity' dataKey='gravity' width={70} />
-          <Column label='Escape Velocity' dataKey='escapeVelocity' width={80} />
-          <Column label='Rotation Period' dataKey='rotationPeriod' width={80} />
-          <Column label='Length Of Day' dataKey='lengthOfDay' width={80} />
-          <Column label='Distance From Sun' dataKey='distanceFromSun' width={80} />
-          <Column label='Perihelion' dataKey='perihelion' width={100} />
-          <Column label='Aphelion' dataKey='aphelion' width={90} />
-          <Column label='Orbital Period' dataKey='orbitalPeriod' width={70} />
-          <Column label='Orbital Velocity' dataKey='orbitalVelocity' width={80} />
-          <Column label='Orbital Inclination' dataKey='orbitalInclination' width={100} />
+          <Column label={this.columnHeader('Mass')} dataKey='mass' width={70} />
+          <Column label={this.columnHeader('Diameter')} dataKey='diameter' width={90} />
+          <Column label={this.columnHeader('Density')} dataKey='density' width={70} />
+          <Column label={this.columnHeader('Gravity')} dataKey='gravity' width={70} />
+          <Column label={this.columnHeader('Escape Velocity')} dataKey='escapeVelocity' width={80} />
+          <Column label={this.columnHeader('Rotation Period')} dataKey='rotationPeriod' width={80} />
+          <Column label={this.columnHeader('Length of Day')} dataKey='lengthOfDay' width={80} />
+          <Column label={this.columnHeader('Distance from Sun')} dataKey='distanceFromSun' width={80} />
+          <Column label={this.columnHeader('Perihelion')} dataKey='perihelion' width={100} />
+          <Column label={this.columnHeader('Aphelion')} dataKey='aphelion' width={90} />
+          <Column label={this.columnHeader('Orbital Period')} dataKey='orbitalPeriod' width={70} />
+          <Column label={this.columnHeader('Orbital Velocity')} dataKey='orbitalVelocity' width={80} />
+          <Column label={this.columnHeader('Orbital Inclination')} dataKey='orbitalInclination' width={100} />
           <Column label='Orbital Eccentricity' dataKey='orbitalEccentricity' width={100} />
-          <Column label='Obliquity To Orbit' dataKey='obliquityToOrbit' width={80} />
-          <Column label='Mean Temperature' dataKey='meanTemperature' width={115} />
-          <Column label='Surface Pressure' dataKey='surfacePressure' width={80} />
+          <Column label={this.columnHeader('Obliquity to Orbit')} dataKey='obliquityToOrbit' width={80} />
+          <Column label={this.columnHeader('Mean Temperature')} dataKey='meanTemperature' width={115} />
+          <Column label={this.columnHeader('Surface Pressure')} dataKey='surfacePressure' width={80} />
         </Table>
 
         <br/>
