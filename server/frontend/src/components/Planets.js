@@ -84,7 +84,7 @@ class Planets extends Component {
         ? 'Satellites of all planets'
         : <span>Satellites of planet {planetSpan}</span>
     }
-    satellitesHeader = <span className='header'>{satellitesHeader}</span>
+    satellitesHeader = <span><span className='header'>{satellitesHeader}</span><span> ({satellites.length} shown)</span></span>
 
     return (
       <div>
