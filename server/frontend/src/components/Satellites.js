@@ -3,14 +3,26 @@ import { Column, Table } from 'react-virtualized';
 
 const Satellites = (props) => {
 
+  // Maps column name to its unit.
+  const units = {
+    'GM': <span>km<sup>3</sup>/sec<sup>2</sup></span>,
+    'Mean Radius': 'km',
+    'Mean Density': <span>g/cm<sup>3</sup></span>,
+    'Magnitude': <span>V<sub>0</sub> or R</span>,
+  }
+
   const _rowClassName = ({index}) => {
     if (index % 2 === 0) {
       return "oddRow";
     }
   }
 
+  const columnHeader = column => {
+    return <span>{column}<br/><span className='unit'>({units[column]})</span></span>
+  }
+
   return(
-    <Table width={545}
+    <Table width={575}
            height={514}
            headerHeight={90}
            rowHeight={40}
@@ -19,11 +31,11 @@ const Satellites = (props) => {
            rowClassName={_rowClassName}
     >
       <Column label='Name' dataKey='name' width={105} className='main-column' />
-      <Column label='GM' dataKey='gm' width={95} />
-      <Column label='Radius' dataKey='radius' width={75} />
-      <Column label='Density' dataKey='density' width={75} />
-      <Column label='Magnitude' dataKey='magnitude' width={105} />
-      <Column label='Albedo' dataKey='albedo' width={70} />
+      <Column label={columnHeader('GM')} dataKey='gm' width={95} />
+      <Column label={columnHeader('Mean Radius')} dataKey='radius' width={75} />
+      <Column label={columnHeader('Mean Density')} dataKey='density' width={75} />
+      <Column label={columnHeader('Magnitude')} dataKey='magnitude' width={105} />
+      <Column label='Geometric Albedo' dataKey='albedo' width={100} />
     </Table>
   )
 
