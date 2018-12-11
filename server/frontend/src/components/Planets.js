@@ -14,8 +14,8 @@ class Planets extends Component {
   units = {
     'Mass': <span>10<sup>24</sup>kg</span>,
     'Diameter': 'km',
-    'Density': <span>kg/m3</span>,
-    'Gravity': <span>m/s2</span>,
+    'Density': <span>kg/m<sup>3</sup></span>,
+    'Gravity': <span>m/s<sup>2</sup></span>,
     'Escape Velocity': 'km/s',
     'Rotation Period': 'hours',
     'Length of Day': 'hours',
