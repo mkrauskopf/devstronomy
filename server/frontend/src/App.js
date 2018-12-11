@@ -32,55 +32,78 @@ const styles = theme => ({
   },
 });
 
-function App(props) {
-  const { classes } = props;
-  return (
-    <MuiThemeProvider theme={theme}>
-      <div>
-
-        <div className={classes.root}>
-          <AppBar position='static'>
-            <Toolbar variant='dense'>
-
-              <Button variant='text' className={classes.button}>
-                Interactive Demo
-              </Button>
-              <Button variant='text' className={classes.button}>
-                Datasets
-              </Button>
-
-              <div className={classes.grow} />
-
-              <Button variant='text'
-                      className={classes.button}
-                      target='_blank'
-                      href='https://github.com/mkrauskopf/devstronomy/'>
-                GitHub&nbsp;<LaunchIcon className={classes.launchIcon} />
-              </Button>
-
-            </Toolbar>
-          </AppBar>
-        </div>
-
-        <div>
-          <div className='content'>
-            This is an interactive demo of Devstronomy datasets. See <a href='/#datasets'>datasets</a> section for more
-            details.
-            <p>
-              Click the planet to see only its satellites.
-            </p>
-          </div>
-
-          <hr/>
-
-          <div className='planets'>
-            <Planets/>
-          </div>
-        </div>
-
+const Content = (prop) => {
+  if (prop.contentKey === 'planets') {
+    return (
+      <div className='planets'>
+        <Planets/>
       </div>
-    </MuiThemeProvider>
-  );
+    );
+  } else {
+    return 'Datasets description will be here.';
+  }
+}
+
+class App extends React.Component {
+
+  state = {
+    contentKey: 'planets'
+  }
+
+  switchContent(contentKey) {
+    this.setState({
+      contentKey: contentKey
+    })
+  }
+
+  render() {
+    const classes = this.props.classes;
+    return (
+      <MuiThemeProvider theme={theme}>
+        <div>
+
+          <div className={classes.root}>
+            <AppBar position='static'>
+              <Toolbar variant='dense'>
+
+                <Button variant='text' className={classes.button} onClick={() => this.switchContent('planets')} >
+                  Interactive Demo
+                </Button>
+                <Button variant='text' className={classes.button} onClick={() => this.switchContent('datasets')} >
+                  Datasets
+                </Button>
+
+                <div className={classes.grow} />
+
+                <Button variant='text'
+                        className={classes.button}
+                        target='_blank'
+                        href='https://github.com/mkrauskopf/devstronomy/'>
+                  GitHub&nbsp;<LaunchIcon className={classes.launchIcon} />
+                </Button>
+
+              </Toolbar>
+            </AppBar>
+          </div>
+
+          <div>
+            <div className='content'>
+              This is an interactive demo of Devstronomy datasets. See <a href='/#datasets'>datasets</a> section for more
+              details.
+              <p>
+                Click the planet to see only its satellites.
+              </p>
+            </div>
+
+            <hr/>
+
+            <Content contentKey={this.state.contentKey} />
+          </div>
+
+        </div>
+      </MuiThemeProvider>);
+  }
+
 }
 
 App.propTypes = {
