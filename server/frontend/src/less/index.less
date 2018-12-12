@@ -23,12 +23,17 @@ body {
   padding: 10px;
 }
 
+.datasets {
+  width:800px;
+  margin:0 auto;
+}
+
 .highlight {
   color: #dddda9;
 }
 
 a, a:visited, a:hover, a:active {
-  color: #aae;
+  color: #aad;
   text-decoration: none;
 }
 
@@ -40,3 +45,50 @@ hr {
   border-color: #444;
 }
 
+span.highlight {
+  color: #ddd;
+}
+
+pre, code {
+  background: lighten(@background, 10%);
+  color: #cdc;
+}
+
+code {
+  padding: 2px 4px 2px 4px;
+}
+
+code.link {
+  background: inherit;
+  color: #aad;
+  padding: 2px 0px 2px 0px;
+}
+
+pre {
+  padding: 10px 10px 10px 10px;
+}
+
+.resultsTable {
+  border: 1px solid green;
+}
+
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid lighten(@background, 20%);
+}
+
+th {
+  text-align: center;
+}
+
+th, td {
+  padding: 7px;
+}
+
+tr:nth-child(2n) {
+  background: lighten(@background, 5%);
+}

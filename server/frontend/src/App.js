@@ -1,7 +1,10 @@
 import React from 'react';
-import Planets from './components/Planets';
-import PropTypes from 'prop-types';
 
+import Planets from './components/Planets';
+import Datasets from './components/Datasets';
+import Links from './links';
+
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
@@ -35,12 +38,29 @@ const styles = theme => ({
 const Content = (prop) => {
   if (prop.contentKey === 'planets') {
     return (
-      <div className='planets'>
-        <Planets/>
+      <div>
+        <div className='content'>
+          This is an interactive version of <a href='https://nssdc.gsfc.nasa.gov/planetary/factsheet/'>Planetary Fact
+          Sheet</a> and  <a href='https://ssd.jpl.nasa.gov/?sat_phys_par'>Planetary Satellite Physical Parameters</a>
+          &nbsp;datasets from {Links.jpl}. See datasets section for more details.
+          <p>
+            <span className='highlight'>Select the planet below</span> to see only its satellites.
+          </p>
+        </div>
+
+        <hr/>
+
+        <div className='planets'>
+          <Planets/>
+        </div>
       </div>
     );
-  } else {
-    return 'Datasets description will be here.';
+  } else if (prop.contentKey === 'datasets') {
+    return (
+      <div className='datasets'>
+        <Datasets/>
+      </div>
+    );
   }
 }
 
@@ -87,16 +107,6 @@ class App extends React.Component {
           </div>
 
           <div>
-            <div className='content'>
-              This is an interactive demo of Devstronomy datasets. See <a href='/#datasets'>datasets</a> section for more
-              details.
-              <p>
-                Click the planet to see only its satellites.
-              </p>
-            </div>
-
-            <hr/>
-
             <Content contentKey={this.state.contentKey} />
           </div>
 
