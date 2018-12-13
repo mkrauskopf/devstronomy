@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:8080/'
+const baseUrl = 'http://localhost:8080/';
 
 export default {
 
@@ -7,8 +7,8 @@ export default {
       .then(results => {
         return results.json();
       }).then(data => {
-        callBack(data)
-      })
+        callBack(data);
+      });
   },
 
   loadSatellites: (planet, callBack) => {
@@ -16,8 +16,8 @@ export default {
       .then(results => {
         return results.json();
       }).then(data => {
-        callBack(data)
-      })
+        callBack(data);
+      });
   },
 
   loadAllSatellites: callBack => {
@@ -25,9 +25,9 @@ export default {
       .then(results => {
         return results.json();
       }).then(data => {
-        callBack(data)
-      })
+        callBack(data);
+      });
   }
 
-}
+};
 

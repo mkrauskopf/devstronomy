@@ -9,17 +9,17 @@ const Satellites = (props) => {
     'Mean Radius': 'km',
     'Mean Density': <span>g/cm<sup>3</sup></span>,
     'Magnitude': <span>V<sub>0</sub> or R</span>,
-  }
+  };
 
   const _rowClassName = ({index}) => {
     if (index % 2 === 0) {
-      return "oddRow";
+      return 'oddRow';
     }
-  }
+  };
 
   const columnHeader = column => {
-    return <span>{column}<br/><span className='unit'>({units[column]})</span></span>
-  }
+    return <span>{column}<br/><span className='unit'>({units[column]})</span></span>;
+  };
 
   return(
     <Table width={575}
@@ -37,9 +37,9 @@ const Satellites = (props) => {
       <Column label={columnHeader('Magnitude')} dataKey='magnitude' width={105} />
       <Column label='Geometric Albedo' dataKey='albedo' width={100} />
     </Table>
-  )
+  );
 
-}
+};
 
-export default Satellites
+export default Satellites;
 
