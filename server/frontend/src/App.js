@@ -39,9 +39,9 @@ const Content = (prop) => {
   if (prop.contentKey === 'planets') {
     return (
       <div>
-        <div className='content'>
+        <div className='contentCenter'>
           This is an interactive version of <a href='https://nssdc.gsfc.nasa.gov/planetary/factsheet/'>Planetary Fact
-          Sheet</a> and  <a href='https://ssd.jpl.nasa.gov/?sat_phys_par'>Planetary Satellite Physical Parameters</a>
+          Sheet</a> and <a href='https://ssd.jpl.nasa.gov/?sat_phys_par'>Planetary Satellite Physical Parameters</a>
           &nbsp;datasets from {Links.jpl}. See datasets section for more details.
           <p>
             <span className='highlight'>Select the planet below</span> to see only its satellites.
@@ -49,7 +49,18 @@ const Content = (prop) => {
         </div>
 
         <hr/>
+        <div className='content'>
+          <span className='warning'>Note:</span> the following is not migrated from original satellite dataset yet:
+          <ul>
+            <li>For <em>Magnitude</em> column in satellites dataset V<sub>0</sub> or R are not distinguished.</li>
+            <li>
+              <em>Uncertainties</em> for some values. For example, for original value <code>13.70±0.04</code> in JPL
+              dataset we have just <code>13.70</code> without <code>0.04</code> uncertainty.
+            </li>
+          </ul>
+        </div>
 
+        <hr/>
         <div className='planets'>
           <Planets/>
         </div>
