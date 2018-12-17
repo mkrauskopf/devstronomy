@@ -43,7 +43,7 @@ const PlanetsContent = () => {
       <div className='contentCenter'>
         This is an interactive version of <a href='https://nssdc.gsfc.nasa.gov/planetary/factsheet/'>Planetary Fact
         Sheet</a> and <a href='https://ssd.jpl.nasa.gov/?sat_phys_par'>Planetary Satellite Physical Parameters</a>
-        &nbsp;datasets from {Links.jpl}. See datasets section for more details.
+        &nbsp;datasets from {Links.jpl}. See <Link to='/datasets'>datasets section</Link> for more details.
         <p>
           <span className='highlight'>Select the planet below</span> to see only its satellites.
         </p>
