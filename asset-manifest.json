@@ -1,13 +1,13 @@
 {
-  "main.css": "/devstronomy/static/css/main.e967d0ee.chunk.css",
-  "main.js": "/devstronomy/static/js/main.a763091a.chunk.js",
-  "main.js.map": "/devstronomy/static/js/main.a763091a.chunk.js.map",
-  "static/js/1.f10494aa.chunk.js": "/devstronomy/static/js/1.f10494aa.chunk.js",
-  "static/js/1.f10494aa.chunk.js.map": "/devstronomy/static/js/1.f10494aa.chunk.js.map",
+  "main.css": "/devstronomy/static/css/main.cacf74bc.chunk.css",
+  "main.js": "/devstronomy/static/js/main.e24d012f.chunk.js",
+  "main.js.map": "/devstronomy/static/js/main.e24d012f.chunk.js.map",
+  "static/js/1.3393ac9e.chunk.js": "/devstronomy/static/js/1.3393ac9e.chunk.js",
+  "static/js/1.3393ac9e.chunk.js.map": "/devstronomy/static/js/1.3393ac9e.chunk.js.map",
   "runtime~main.js": "/devstronomy/static/js/runtime~main.2b48f421.js",
   "runtime~main.js.map": "/devstronomy/static/js/runtime~main.2b48f421.js.map",
-  "static/css/main.e967d0ee.chunk.css.map": "/devstronomy/static/css/main.e967d0ee.chunk.css.map",
+  "static/css/main.cacf74bc.chunk.css.map": "/devstronomy/static/css/main.cacf74bc.chunk.css.map",
   "index.html": "/devstronomy/index.html",
-  "precache-manifest.47ddcad7b7925d50b99f171720bf38c0.js": "/devstronomy/precache-manifest.47ddcad7b7925d50b99f171720bf38c0.js",
+  "precache-manifest.77ac5c9cc99119a93411b8992a45aa2a.js": "/devstronomy/precache-manifest.77ac5c9cc99119a93411b8992a45aa2a.js",
   "service-worker.js": "/devstronomy/service-worker.js"
 }
