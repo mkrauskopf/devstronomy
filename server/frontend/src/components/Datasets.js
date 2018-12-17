@@ -388,8 +388,7 @@ mysql -u [uname] -p[pass] devstronomy &lt; data/sql/devstronomy.sql`}</pre>
       <p>The data are converted from CSV files to SQL schema with the <a href='jconverter'>JConverter tool</a>. The
       final {datasetsSql} dump is then created via <code>mysqldump</code>:</p>
 
-      <pre><code class='shell language-shell'>mysqldump -u [uname] -p[pass] devstronomy &gt; data/sql/devstronomy.sql
-      </code></pre>
+      <pre>mysqldump -u [uname] -p[pass] devstronomy &gt; data/sql/devstronomy.sql</pre>
 
       <h3>CSV notes</h3>
 
