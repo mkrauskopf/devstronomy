@@ -81,10 +81,7 @@ const App = (props) => {
 
   const { classes } = props;
   return (
-    // 'basename' is used because of deployment to https://mkrauskopf.github.io/devstronomy/.
-    // React Router does not work well otherwise. This is likely temporary until the code is hosted on the root of
-    // https://devstronomy.github.io.
-    <Router basename='/devstronomy'>
+    <Router>
       <MuiThemeProvider theme={theme}>
         <div>
 
