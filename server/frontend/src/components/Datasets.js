@@ -1,4 +1,5 @@
 import React from 'react';
+import { HashLink as Link } from 'react-router-hash-link';
 import Links from './../links';
 
 const github = 'https://github.com/mkrauskopf/devstronomy/blob/master/';
@@ -34,26 +35,26 @@ const Datasets = () => {
       <hr id='tableofcontents'/>
       <h2>Table of Contents</h2>
       <ol>
-        <li><a href='#downloads'>Quick Downloads</a></li>
-        <li><a href='#information'>Datasets information</a></li>
+        <li><Link to='#downloads'>Quick Downloads</Link></li>
+        <li><Link to='#information'>Datasets information</Link></li>
         <ol>
-          <li><a href='#planets'>Planets</a></li>
-          <li><a href='#satellites'>Planetary Satellites</a></li>
+          <li><Link to='#planets'>Planets</Link></li>
+          <li><Link to='#satellites'>Planetary Satellites</Link></li>
         </ol>
-        <li><a href='#csv'>CSV files</a></li>
-        <li><a href='#json'>JSON files</a></li>
-        <li><a href='#sql'>SQL Dataset</a>
+        <li><Link to='#csv'>CSV files</Link></li>
+        <li><Link to='#json'>JSON files</Link></li>
+        <li><Link to='#sql'>SQL Dataset</Link>
           <ol>
-            <li><a href='#sql-examples'>SQL usage examples</a>
+            <li><Link to='#sql-examples'>SQL usage examples</Link>
               <ol>
-                <li><a href='#ten-moons-saturn'>Ten largest moons of Saturn</a></li>
-                <li><a href='#planets-ecc'>Planets ordered by eccentricity</a></li>
-                <li><a href='#moons-inconsistency'>Inconsistency in the number of moons</a></li>
+                <li><Link to='#ten-moons-saturn'>Ten largest moons of Saturn</Link></li>
+                <li><Link to='#planets-ecc'>Planets ordered by eccentricity</Link></li>
+                <li><Link to='#moons-inconsistency'>Inconsistency in the number of moons</Link></li>
               </ol>
             </li>
           </ol>
         </li>
-        <li><a href='#implementation'>Implementation notes</a></li>
+        <li><Link to='#implementation'>Implementation notes</Link></li>
       </ol>
 
 
