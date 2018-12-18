@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "e24d012fcbd0b10e8078",
+    "revision": "2947b32170dfdd29b40d",
     "url": "/devstronomy/static/css/main.cacf74bc.chunk.css"
   },
   {
-    "revision": "e24d012fcbd0b10e8078",
-    "url": "/devstronomy/static/js/main.e24d012f.chunk.js"
+    "revision": "2947b32170dfdd29b40d",
+    "url": "/devstronomy/static/js/main.2947b321.chunk.js"
   },
   {
     "revision": "3393ac9e2c822d9f7de4",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/devstronomy/static/js/runtime~main.2b48f421.js"
   },
   {
-    "revision": "a6fc8717c5b7747e388ef73114543461",
+    "revision": "990cd332ba3b1bbf4ad5336f2bb701f2",
     "url": "/devstronomy/index.html"
   }
 ];
