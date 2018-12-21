@@ -23,7 +23,7 @@ const theme = createMuiTheme({
   }
 });
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     flexGrow: 1,
   },

@@ -168,7 +168,7 @@ const Datasets = () => {
       <h2>SQL Dataset</h2>
 
       <p>The {datasetsSql} creates tables for planets and their satellites and fill them with
-      data from the CSV files <a href='#csv'>described above</a>.</p>
+      data from the CSV files <Link to='#csv'>described above</Link>.</p>
 
       <p>For example for MySQL database following commands will create the database:</p>
 
@@ -386,8 +386,9 @@ mysql -u [uname] -p[pass] devstronomy &lt; data/sql/devstronomy.sql`}</pre>
 
       <h3>SQL notes</h3>
       
-      <p>The data are converted from CSV files to SQL schema with the <a href='jconverter'>JConverter tool</a>. The
-      final {datasetsSql} dump is then created via <code>mysqldump</code>:</p>
+      <p>The data are converted from CSV files to SQL schema with
+        the <a href='https://github.com/mkrauskopf/devstronomy/tree/master/jconverter'>JConverter tool</a>.
+        The final {datasetsSql} dump is then created via <code>mysqldump</code>:</p>
 
       <pre>mysqldump -u [uname] -p[pass] devstronomy &gt; data/sql/devstronomy.sql</pre>
 
@@ -405,5 +406,3 @@ p.T.to_csv('planets.csv', header=False)`}</pre>
 };
 
 export default Datasets;
-
-
