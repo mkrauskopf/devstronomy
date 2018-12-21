@@ -1,4 +1,6 @@
-@background: #111;
+@background: #1E1E1E;
+@header-color: #7AD;
+@link-color: #aad;
 
 html {
   background: @background;
@@ -12,6 +14,10 @@ body {
   color: #aaa;
   text-rendering: optimizeLegibility;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: @header-color;
 }
 
 .content, .contentCenter {
@@ -40,7 +46,7 @@ body {
 }
 
 a, a:visited, a:hover, a:active {
-  color: #aad;
+  color: @link-color;
   text-decoration: none;
 }
 
@@ -54,6 +60,10 @@ hr {
 
 span.highlight {
   color: #ddd;
+}
+
+.header-highlight {
+  color: lighten(@header-color, 15%);
 }
 
 pre, code {
@@ -98,4 +108,26 @@ th, td {
 
 tr:nth-child(2n) {
   background: lighten(@background, 5%);
+}
+
+button.ahref {
+  background:none!important;
+  color:inherit;
+  border:none;
+  padding:0!important;
+  font: inherit;
+  /*border is optional*/
+  border-bottom:1px solid #999;
+  cursor: pointer;
+}
+
+.header {
+  display: inline-block;
+  font-size: larger;
+  margin-block-start: 10px;
+  margin-block-end: 10px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  color: @header-color;
 }

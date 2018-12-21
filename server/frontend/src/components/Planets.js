@@ -6,7 +6,7 @@ import dataLoader from './data-loader-json.js'
 // styles
 import '../css-react-virtualized/styles.css'; // only needs to be imported once
 import '../css/components/table.css';
-import '../css/components/components.css';
+import '../css/index.css';
 
 class Planets extends Component {
 
@@ -75,7 +75,7 @@ class Planets extends Component {
       ? <span> (<button className='ahref' onClick={() => this.loadAllSatellites()}>show all satellites</button>)</span>
       : ' (select a planet above to filter satellites)';
 
-    const planetSpan = <span className='highlight'>{planetName}</span>
+    const planetSpan = <span className='header-highlight'>{planetName}</span>
     let satellitesHeader;
     if (satellites.length === 0) {
       satellitesHeader = <span>Planet {planetSpan} does not have any satellites</span>
