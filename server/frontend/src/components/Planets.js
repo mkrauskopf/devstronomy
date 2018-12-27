@@ -7,39 +7,51 @@ import dataLoader from './data-loader-json.js'
 import '../css-react-virtualized/styles.css'; // only needs to be imported once
 import '../css/components/table.css';
 import '../css/index.css';
+import { List } from 'immutable';
+import Immutable from 'immutable';
+import SortDirection from "./SortDirection";
 
 class Planets extends Component {
 
-  // Maps column name to its unit.
-  units = {
-    'Mass': <span>10<sup>24</sup>kg</span>,
-    'Diameter': 'km',
-    'Density': <span>kg/m<sup>3</sup></span>,
-    'Gravity': <span>m/s<sup>2</sup></span>,
-    'Escape Velocity': 'km/s',
-    'Rotation Period': 'hours',
-    'Length of Day': 'hours',
-    'Distance from Sun': <span>10<sup>6</sup> km</span>,
-    'Perihelion': <span>10<sup>6</sup> km</span>,
-    'Aphelion': <span>10<sup>6</sup> km</span>,
-    'Orbital Period': 'days',
-    'Orbital Velocity': 'km/s',
-    'Orbital Inclination': 'degrees',
-    'Orbital Eccentricity': '',
-    'Obliquity to Orbit': 'degrees',
-    'Mean Temperature': 'C',
-    'Surface Pressure': 'bars',
-    'Number of Moons': 'number',
-    'Ring System?': 'Yes/No',
-    'Global Magnetic Field?': 'Yes/No',
-  }
+  constructor(props) {
+    super(props);
+    const sortBy = 'numberOfMoons';
+    const sortDirection = SortDirection.ASC;
 
-  state = {
-    planets: [],
-    selectedPlanet: null,
-    satellites: []
-  }
+    // Maps column name to its unit.
+    const units = {
+      'Mass': <span>10<sup>24</sup>kg</span>,
+      'Diameter': 'km',
+      'Density': <span>kg/m<sup>3</sup></span>,
+      'Gravity': <span>m/s<sup>2</sup></span>,
+      'Escape Velocity': 'km/s',
+      'Rotation Period': 'hours',
+      'Length of Day': 'hours',
+      'Distance from Sun': <span>10<sup>6</sup> km</span>,
+      'Perihelion': <span>10<sup>6</sup> km</span>,
+      'Aphelion': <span>10<sup>6</sup> km</span>,
+      'Orbital Period': 'days',
+      'Orbital Velocity': 'km/s',
+      'Orbital Inclination': 'degrees',
+      'Orbital Eccentricity': '',
+      'Obliquity to Orbit': 'degrees',
+      'Mean Temperature': 'C',
+      'Surface Pressure': 'bars',
+      'Number of Moons': 'number',
+      'Ring System?': 'Yes/No',
+      'Global Magnetic Field?': 'Yes/No',
+    }
 
+    this.state = {
+      planets: List(),
+      selectedPlanet: null,
+      satellites: [],
+      sortBy: sortBy,
+      sortDirection: sortDirection,
+      units: units
+    }
+    this._sort = this._sort.bind(this);
+  }
   showMoons = (planet) => {
     if (planet === this.state.selectedPlanet) {
       this.loadAllSatellites();
@@ -63,14 +75,15 @@ class Planets extends Component {
   }
   
   columnHeader = column => {
-    return <span>{column}<br/><span className='unit'>({this.units[column]})</span></span>
+    return <span>{column}<br/><span className='unit'>({this.state.units[column]})</span></span>
   }
 
   render() {
     const selectedPlanet = this.state.selectedPlanet;
     const satellites = this.state.satellites;
     const planetName = selectedPlanet === null ? null : selectedPlanet.name;
-
+    const sortDirection = this.state.sortDirection;
+    const sortBy = this.state.sortBy;
     const showAllButton = selectedPlanet
       ? <span> (<button className='ahref' onClick={() => this.loadAllSatellites()}>show all satellites</button>)</span>
       : ' (select a planet above to filter satellites)';
@@ -95,13 +108,16 @@ class Planets extends Component {
                height={450}
                headerHeight={90}
                rowHeight={40}
-               rowCount={this.state.planets.length}
-               rowGetter={({ index }) => this.state.planets[index]}
+               rowCount={this.state.planets.size}
+               rowGetter={({ index }) => this.state.planets.get(index)}
                rowClassName={this._rowClassName}
                onRowClick={(props) => this.showMoons(props.rowData)}
+               sort={this._sort}
+               sortBy={sortBy}
+               sortDirection={sortDirection}
                >
-          <Column label='Name' dataKey='name' width={70} className='main-column' />
-          <Column label='Moons' dataKey='numberOfMoons' width={70} />
+          <Column label='Name' dataKey='name' disableSort={false} width={70} className='main-column' />
+          <Column label='Moons' dataKey='numberOfMoons' disableSort={false} width={70} />
           <Column label={this.columnHeader('Mass')} dataKey='mass' width={70} />
           <Column label={this.columnHeader('Diameter')} dataKey='diameter' width={90} />
           <Column label={this.columnHeader('Density')} dataKey='density' width={70} />
@@ -139,7 +155,7 @@ class Planets extends Component {
   componentDidMount() {
     dataLoader.loadAllPlanets(data =>
       this.setState({
-        planets: data
+        planets: Immutable.List(data),
       })
     );
 
@@ -155,6 +171,20 @@ class Planets extends Component {
     );
   }
 
+  _sort({sortBy, sortDirection}) {
+    const planetsFromState = this.state.planets;
+    const sortedPlanets = this._sortList({sortBy, sortDirection, planetsFromState});
+    this.setState({sortBy, sortDirection, planets: sortedPlanets});
+  }
+
+  _sortList({sortBy, sortDirection, data}) {
+    const list = this.state.planets;
+    return list
+        .sortBy(item => item[sortBy])
+        .update(
+            list => (sortDirection === 'DESC' ? list.reverse() : list),
+        );
+  }
 }
 
 export default Planets;
