@@ -38,15 +38,13 @@ class Planets extends Component {
 
   constructor(props) {
     super(props);
-    const sortBy = 'numberOfMoons';
-    const sortDirection = SortDirection.ASC;
 
     this.state = {
       planets: List(),
       selectedPlanet: null,
       satellites: [],
-      sortBy: sortBy,
-      sortDirection: sortDirection,
+      sortBy: null,
+      sortDirection: null,
     }
     this._sort = this._sort.bind(this);
   }
