@@ -45,7 +45,8 @@ const PlanetsContent = () => {
         Sheet</a> and <a href='https://ssd.jpl.nasa.gov/?sat_phys_par'>Planetary Satellite Physical Parameters</a>
         &nbsp;datasets from {Links.jpl}. See <Link to='/datasets'>datasets section</Link> for more details.
         <p>
-          <span className='highlight'>Select the planet below</span> to see only its satellites.
+          Tips: <span className='highlight'>Select the planet below</span> to see only its satellites
+          or <span className='highlight'>click on the column</span> to sort.
         </p>
       </div>
 
