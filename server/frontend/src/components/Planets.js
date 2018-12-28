@@ -62,6 +62,9 @@ class Planets extends Component {
   }
 
   _rowClassName = ({index}) => {
+    if (index === -1) {
+      return null;
+    }
     if (this.state.selectedPlanet === this.state.planets.get(index)) {
       return 'selectedRow';
     }
