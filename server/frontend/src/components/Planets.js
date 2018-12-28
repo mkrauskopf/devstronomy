@@ -11,6 +11,29 @@ import { List } from 'immutable';
 import Immutable from 'immutable';
 import SortDirection from "./SortDirection";
 
+const units = {
+  'Mass': <span>10<sup>24</sup>kg</span>,
+  'Diameter': 'km',
+  'Density': <span>kg/m<sup>3</sup></span>,
+  'Gravity': <span>m/s<sup>2</sup></span>,
+  'Escape Velocity': 'km/s',
+  'Rotation Period': 'hours',
+  'Length of Day': 'hours',
+  'Distance from Sun': <span>10<sup>6</sup> km</span>,
+  'Perihelion': <span>10<sup>6</sup> km</span>,
+  'Aphelion': <span>10<sup>6</sup> km</span>,
+  'Orbital Period': 'days',
+  'Orbital Velocity': 'km/s',
+  'Orbital Inclination': 'degrees',
+  'Orbital Eccentricity': '',
+  'Obliquity to Orbit': 'degrees',
+  'Mean Temperature': 'C',
+  'Surface Pressure': 'bars',
+  'Number of Moons': 'number',
+  'Ring System?': 'Yes/No',
+  'Global Magnetic Field?': 'Yes/No',
+}
+
 class Planets extends Component {
 
   constructor(props) {
@@ -18,37 +41,12 @@ class Planets extends Component {
     const sortBy = 'numberOfMoons';
     const sortDirection = SortDirection.ASC;
 
-    // Maps column name to its unit.
-    const units = {
-      'Mass': <span>10<sup>24</sup>kg</span>,
-      'Diameter': 'km',
-      'Density': <span>kg/m<sup>3</sup></span>,
-      'Gravity': <span>m/s<sup>2</sup></span>,
-      'Escape Velocity': 'km/s',
-      'Rotation Period': 'hours',
-      'Length of Day': 'hours',
-      'Distance from Sun': <span>10<sup>6</sup> km</span>,
-      'Perihelion': <span>10<sup>6</sup> km</span>,
-      'Aphelion': <span>10<sup>6</sup> km</span>,
-      'Orbital Period': 'days',
-      'Orbital Velocity': 'km/s',
-      'Orbital Inclination': 'degrees',
-      'Orbital Eccentricity': '',
-      'Obliquity to Orbit': 'degrees',
-      'Mean Temperature': 'C',
-      'Surface Pressure': 'bars',
-      'Number of Moons': 'number',
-      'Ring System?': 'Yes/No',
-      'Global Magnetic Field?': 'Yes/No',
-    }
-
     this.state = {
       planets: List(),
       selectedPlanet: null,
       satellites: [],
       sortBy: sortBy,
       sortDirection: sortDirection,
-      units: units
     }
     this._sort = this._sort.bind(this);
   }
@@ -75,7 +73,7 @@ class Planets extends Component {
   }
   
   columnHeader = column => {
-    return <span>{column}<br/><span className='unit'>({this.state.units[column]})</span></span>
+    return <span>{column}<br/><span className='unit'>({units[column]})</span></span>
   }
 
   render() {
