@@ -48,6 +48,7 @@ class Planets extends Component {
     }
     this._sort = this._sort.bind(this);
   }
+
   showMoons = (planet) => {
     if (planet === this.state.selectedPlanet) {
       this.loadAllSatellites();
@@ -72,7 +73,7 @@ class Planets extends Component {
       return 'oddRow';
     }
   }
-  
+
   columnHeader = column => {
     return <span>{column}<br/><span className='unit'>({units[column]})</span></span>
   }
@@ -116,6 +117,7 @@ class Planets extends Component {
                sortDirection={sortDirection}
                >
           <Column label='Name' dataKey='name' width={70} className='main-column' />
+          <Column label={this.columnHeader('Distance from Sun')} dataKey='distanceFromSun' width={80} />
           <Column label='Moons' dataKey='numberOfMoons' width={70} />
           <Column label={this.columnHeader('Mass')} dataKey='mass' width={70} />
           <Column label={this.columnHeader('Diameter')} dataKey='diameter' width={90} />
@@ -124,7 +126,6 @@ class Planets extends Component {
           <Column label={this.columnHeader('Escape Velocity')} dataKey='escapeVelocity' width={80} />
           <Column label={this.columnHeader('Rotation Period')} dataKey='rotationPeriod' width={80} />
           <Column label={this.columnHeader('Length of Day')} dataKey='lengthOfDay' width={80} />
-          <Column label={this.columnHeader('Distance from Sun')} dataKey='distanceFromSun' width={80} />
           <Column label={this.columnHeader('Perihelion')} dataKey='perihelion' width={100} />
           <Column label={this.columnHeader('Aphelion')} dataKey='aphelion' width={90} />
           <Column label={this.columnHeader('Orbital Period')} dataKey='orbitalPeriod' width={70} />
