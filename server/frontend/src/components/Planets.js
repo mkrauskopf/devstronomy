@@ -66,7 +66,7 @@ class Planets extends Component {
   }
 
   _rowClassName = ({index}) => {
-    if (this.state.selectedPlanet === this.state.planets[index]) {
+    if (this.state.selectedPlanet === this.state.planets.get(index)) {
       return 'selectedRow';
     }
     if (index % 2 === 0) {
@@ -116,8 +116,8 @@ class Planets extends Component {
                sortBy={sortBy}
                sortDirection={sortDirection}
                >
-          <Column label='Name' dataKey='name' disableSort={false} width={70} className='main-column' />
-          <Column label='Moons' dataKey='numberOfMoons' disableSort={false} width={70} />
+          <Column label='Name' dataKey='name' width={70} className='main-column' />
+          <Column label='Moons' dataKey='numberOfMoons' width={70} />
           <Column label={this.columnHeader('Mass')} dataKey='mass' width={70} />
           <Column label={this.columnHeader('Diameter')} dataKey='diameter' width={90} />
           <Column label={this.columnHeader('Density')} dataKey='density' width={70} />
