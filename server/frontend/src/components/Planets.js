@@ -178,10 +178,9 @@ class Planets extends Component {
     return list
         .sortBy(item => item[sortBy])
         .update(
-            list => (sortDirection === 'DESC' ? list.reverse() : list),
+            list => (sortDirection === SortDirection.DESC ? list.reverse() : list),
         );
   }
 }
 
 export default Planets;
-
