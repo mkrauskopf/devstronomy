@@ -10,7 +10,7 @@ export interface ISatellite {
 
 interface Props {
   planet: IPlanet | null;
-  satellites: any;
+  satellites: ISatellite[];
 }
 
 const Satellites: React.SFC<Props> = (props) => {

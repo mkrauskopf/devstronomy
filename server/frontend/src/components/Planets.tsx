@@ -110,7 +110,7 @@ export class Planets extends React.Component<{}, State> {
           headerHeight={90}
           rowHeight={40}
           rowCount={this.state.planets.length}
-          rowGetter={({ index }: any) => this.state.planets[index]}
+          rowGetter={({ index }: { index: number }) => this.state.planets[index]}
           rowClassName={this._rowClassName}
           onRowClick={(props: any) => this.showMoons(props.rowData)}
         >
