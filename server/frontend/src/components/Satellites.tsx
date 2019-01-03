@@ -16,9 +16,9 @@ interface Props {
 const Satellites: React.SFC<Props> = (props) => {
 
   // Maps column name to its unit.
-  const units = {
+  const units: { [unitId: string]: JSX.Element } = {
     'GM': <span>km<sup>3</sup>/sec<sup>2</sup></span>,
-    'Mean Radius': 'km',
+    'Mean Radius': <span>km</span>,
     'Mean Density': <span>g/cm<sup>3</sup></span>,
     'Magnitude': <span>V<sub>0</sub> or R</span>,
   };

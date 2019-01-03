@@ -24,27 +24,27 @@ interface State {
 export class Planets extends React.Component<{}, State> {
 
   // Maps column name to its unit.
-  units: { [unitId: string]: any } = {
+  units: { [unitId: string]: JSX.Element } = {
     'Mass': <span>10<sup>24</sup>kg</span>,
-    'Diameter': 'km',
+    'Diameter': <span>km</span>,
     'Density': <span>kg/m<sup>3</sup></span>,
     'Gravity': <span>m/s<sup>2</sup></span>,
-    'Escape Velocity': 'km/s',
-    'Rotation Period': 'hours',
-    'Length of Day': 'hours',
+    'Escape Velocity': <span>km/s</span>,
+    'Rotation Period': <span>hours</span>,
+    'Length of Day': <span>hours</span>,
     'Distance from Sun': <span>10<sup>6</sup> km</span>,
     'Perihelion': <span>10<sup>6</sup> km</span>,
     'Aphelion': <span>10<sup>6</sup> km</span>,
-    'Orbital Period': 'days',
-    'Orbital Velocity': 'km/s',
-    'Orbital Inclination': 'degrees',
-    'Orbital Eccentricity': '',
-    'Obliquity to Orbit': 'degrees',
-    'Mean Temperature': 'C',
-    'Surface Pressure': 'bars',
-    'Number of Moons': 'number',
-    'Ring System?': 'Yes/No',
-    'Global Magnetic Field?': 'Yes/No',
+    'Orbital Period': <span>days</span>,
+    'Orbital Velocity': <span>km/s</span>,
+    'Orbital Inclination': <span>degrees</span>,
+    'Orbital Eccentricity': <span></span>,
+    'Obliquity to Orbit': <span>degrees</span>,
+    'Mean Temperature': <span>C</span>,
+    'Surface Pressure': <span>bars</span>,
+    'Number of Moons': <span>number</span>,
+    'Ring System?': <span>Yes/No</span>,
+    'Global Magnetic Field?': <span>Yes/No</span>,
   }
 
   readonly state: State = {
