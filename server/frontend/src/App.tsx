@@ -1,8 +1,8 @@
 import React from 'react';
 import { HashRouter as Router, Link } from 'react-router-dom';
-import Route from 'react-router-dom/Route';
+import { Route } from 'react-router-dom';
 
-import Planets from './components/Planets';
+import { Planets } from './components/Planets';
 import Datasets from './components/Datasets';
 import Links from './links';
 
@@ -77,7 +77,7 @@ const DatasetsContent = () => {
   );
 };
 
-const App = (props) => {
+const App = (props: { classes: any; }) => {
 
   const { classes } = props;
   return (
@@ -89,10 +89,10 @@ const App = (props) => {
             <AppBar position='static'>
               <Toolbar variant='dense'>
 
-                <Button variant='text' className={classes.button} component={Link} to='/planets'>
-                  Planets & Satellites
+                <Button variant='text' className={classes.button} component={props => <Link to="/planets" />}>
+                  Planets &amp; Satellites
                 </Button>
-                <Button variant='text' className={classes.button} component={Link} to='/datasets'>
+                <Button variant='text' className={classes.button} component={props => <Link to="/datasets" />}>
                   Datasets
                 </Button>
 
@@ -125,4 +125,3 @@ App.propTypes = {
 };
 
 export default withStyles(styles)(App);
-

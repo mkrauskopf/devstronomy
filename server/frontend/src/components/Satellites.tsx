@@ -1,7 +1,19 @@
 import React from 'react';
 import { Column, Table } from 'react-virtualized';
+import { IPlanet } from './Planets';
 
-const Satellites = (props) => {
+export interface ISatellite {
+
+  id: number;
+
+}
+
+interface Props {
+  planet: IPlanet | null;
+  satellites: any;
+}
+
+const Satellites: React.SFC<Props> = (props) => {
 
   // Maps column name to its unit.
   const units = {
@@ -11,13 +23,11 @@ const Satellites = (props) => {
     'Magnitude': <span>V<sub>0</sub> or R</span>,
   };
 
-  const _rowClassName = ({index}) => {
-    if (index % 2 === 0) {
-      return 'oddRow';
-    }
+  const _rowClassName = ({ index }: { index: number }) => {
+    return index % 2 === 0 ? 'oddRow' : '';
   };
 
-  const columnHeader = column => {
+  const columnHeader = (column: string) => {
     return <span>{column}<br/><span className='unit'>({units[column]})</span></span>;
   };
 

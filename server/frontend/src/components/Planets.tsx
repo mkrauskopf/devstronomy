@@ -1,17 +1,30 @@
-import React, { Component } from 'react';
-import Satellites from './Satellites'
+import React from 'react';
+import Satellites, { ISatellite } from './Satellites'
 import { Column, Table } from 'react-virtualized';
-import dataLoader from './data-loader-json.js'
+import dataLoader from './data-loader-json'
 
 // styles
 import '../css-react-virtualized/styles.css'; // only needs to be imported once
 import '../css/components/table.css';
 import '../css/index.css';
 
-class Planets extends Component {
+export interface IPlanet {
+
+  id: number;
+  name: string;
+
+}
+
+interface State {
+  planets: IPlanet[];
+  selectedPlanet: IPlanet | null;
+  satellites: ISatellite[];
+}
+
+export class Planets extends React.Component<{}, State> {
 
   // Maps column name to its unit.
-  units = {
+  units: { [unitId: string]: any } = {
     'Mass': <span>10<sup>24</sup>kg</span>,
     'Diameter': 'km',
     'Density': <span>kg/m<sup>3</sup></span>,
@@ -34,17 +47,17 @@ class Planets extends Component {
     'Global Magnetic Field?': 'Yes/No',
   }
 
-  state = {
+  readonly state: State = {
     planets: [],
     selectedPlanet: null,
     satellites: []
   }
 
-  showMoons = (planet) => {
+  showMoons = (planet: IPlanet) => {
     if (planet === this.state.selectedPlanet) {
       this.loadAllSatellites();
     } else {
-      dataLoader.loadSatellites(planet, data =>
+      dataLoader.loadSatellites(planet, (data: ISatellite[]) =>
         this.setState({
           satellites: data,
           selectedPlanet: planet
@@ -53,20 +66,21 @@ class Planets extends Component {
     }
   }
 
-  _rowClassName = ({index}) => {
+  _rowClassName = ({ index }: { index: number }) => {
     if (this.state.selectedPlanet === this.state.planets[index]) {
       return 'selectedRow';
     }
     if (index % 2 === 0) {
       return 'oddRow';
     }
-  }
-  
-  columnHeader = column => {
-    return <span>{column}<br/><span className='unit'>({this.units[column]})</span></span>
+    return '';
   }
 
-  render() {
+  columnHeader = (column: string) => {
+    return <span>{column}<br /><span className='unit'>({this.units[column]})</span></span>
+  }
+
+  render(): React.ReactNode {
     const selectedPlanet = this.state.selectedPlanet;
     const satellites = this.state.satellites;
     const planetName = selectedPlanet === null ? null : selectedPlanet.name;
@@ -92,14 +106,14 @@ class Planets extends Component {
         <span className='header'>Planets of our Solar System</span>
 
         <Table width={1950}
-               height={450}
-               headerHeight={90}
-               rowHeight={40}
-               rowCount={this.state.planets.length}
-               rowGetter={({ index }) => this.state.planets[index]}
-               rowClassName={this._rowClassName}
-               onRowClick={(props) => this.showMoons(props.rowData)}
-               >
+          height={450}
+          headerHeight={90}
+          rowHeight={40}
+          rowCount={this.state.planets.length}
+          rowGetter={({ index }: any) => this.state.planets[index]}
+          rowClassName={this._rowClassName}
+          onRowClick={(props: any) => this.showMoons(props.rowData)}
+        >
           <Column label='Name' dataKey='name' width={70} className='main-column' />
           <Column label='Moons' dataKey='numberOfMoons' width={70} />
           <Column label={this.columnHeader('Mass')} dataKey='mass' width={70} />
@@ -121,7 +135,7 @@ class Planets extends Component {
           <Column label={this.columnHeader('Surface Pressure')} dataKey='surfacePressure' width={80} />
         </Table>
 
-        <br/>
+        <br />
         <div>
           {satellitesHeader}{showAllButton}
         </div>
@@ -137,7 +151,7 @@ class Planets extends Component {
   //<Column label='Has Global Magnetic Field' dataKey='hasGlobalMagneticField' width={80} className='text' />
 
   componentDidMount() {
-    dataLoader.loadAllPlanets(data =>
+    dataLoader.loadAllPlanets((data: IPlanet[]) =>
       this.setState({
         planets: data
       })
@@ -147,7 +161,7 @@ class Planets extends Component {
   }
 
   loadAllSatellites() {
-    dataLoader.loadAllSatellites(data =>
+    dataLoader.loadAllSatellites((data: ISatellite[]) =>
       this.setState({
         satellites: data,
         selectedPlanet: null
@@ -156,6 +170,3 @@ class Planets extends Component {
   }
 
 }
-
-export default Planets;
-
