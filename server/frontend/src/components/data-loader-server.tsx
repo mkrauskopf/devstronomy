@@ -1,6 +1,8 @@
+import ICallbacks from './data-loaders';
+
 const baseUrl = 'http://localhost:8080/';
 
-export default {
+const callbacks: ICallbacks = {
 
   loadAllPlanets: callBack => {
     fetch(baseUrl + 'planet/')
@@ -31,3 +33,4 @@ export default {
 
 };
 
+export default callbacks;

@@ -1,7 +1,8 @@
 import planets from './../data/planets.json';
 import satellites from './../data/satellites.json';
+import ICallbacks from './data-loaders.jsx';
 
-export default {
+const callbacks: ICallbacks = {
 
   // Loads all planets in the Solar System.
   loadAllPlanets: callBack => {
@@ -20,3 +21,4 @@ export default {
 
 };
 
+export default callbacks;

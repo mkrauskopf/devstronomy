@@ -4,7 +4,7 @@ import Links from './../links';
 
 const github = 'https://github.com/mkrauskopf/devstronomy/blob/master/';
 
-const gitHubLink = (relPath, fileName) =>
+const gitHubLink = (relPath: string, fileName: string) =>
   <a href={github + 'data/' + relPath + fileName}><code className='link'>{fileName}</code></a>;
 
 // Placeholders used in the HTML below.
@@ -30,7 +30,7 @@ const Datasets = () => {
             <li>natural satellites(moons) of all planets</li>
           </ul>
       </p>
-    
+
 
       <hr id='tableofcontents'/>
       <h2>Table of Contents</h2>
@@ -385,7 +385,7 @@ mysql -u [uname] -p[pass] devstronomy &lt; data/sql/devstronomy.sql`}</pre>
       <h2>Implementation notes</h2>
 
       <h3>SQL notes</h3>
-      
+
       <p>The data are converted from CSV files to SQL schema with
         the <a href='https://github.com/mkrauskopf/devstronomy/tree/master/jconverter'>JConverter tool</a>.
         The final {datasetsSql} dump is then created via <code>mysqldump</code>:</p>
