@@ -1,24 +1,26 @@
 import React from 'react';
 import Satellites, { ISatellite } from './Satellites'
-import { Column, Table } from 'react-virtualized';
+import { Column, Table, SortDirectionType } from 'react-virtualized';
 import dataLoader from './data-loader-json'
 
 // styles
 import '../css-react-virtualized/styles.css'; // only needs to be imported once
 import '../css/components/table.css';
 import '../css/index.css';
+import { List } from 'immutable';
+import SortDirection from "./SortDirection";
 
 export interface IPlanet {
-
   id: number;
   name: string;
-
 }
 
 interface State {
-  planets: IPlanet[];
+  planets: List<IPlanet>;
   selectedPlanet: IPlanet | null;
   satellites: ISatellite[];
+  sortBy?: string;
+  sortDirection?: SortDirectionType;
 }
 
 export class Planets extends React.Component<{}, State> {
@@ -47,10 +49,15 @@ export class Planets extends React.Component<{}, State> {
     'Global Magnetic Field?': <span>Yes/No</span>,
   }
 
-  readonly state: State = {
-    planets: [],
-    selectedPlanet: null,
-    satellites: []
+  constructor(props: {}) {
+    super(props);
+
+    this.state = {
+      planets: List<IPlanet>(),
+      selectedPlanet: null,
+      satellites: [],
+    }
+    this._sort = this._sort.bind(this);
   }
 
   showMoons = (planet: IPlanet) => {
@@ -67,7 +74,10 @@ export class Planets extends React.Component<{}, State> {
   }
 
   _rowClassName = ({ index }: { index: number }) => {
-    if (this.state.selectedPlanet === this.state.planets[index]) {
+    if (index === -1) {
+      return '';
+    }
+    if (this.state.selectedPlanet === this.state.planets.get(index)) {
       return 'selectedRow';
     }
     if (index % 2 === 0) {
@@ -84,7 +94,8 @@ export class Planets extends React.Component<{}, State> {
     const selectedPlanet = this.state.selectedPlanet;
     const satellites = this.state.satellites;
     const planetName = selectedPlanet === null ? null : selectedPlanet.name;
-
+    const sortDirection = this.state.sortDirection;
+    const sortBy = this.state.sortBy;
     const showAllButton = selectedPlanet
       ? <span> (<button className='ahref' onClick={() => this.loadAllSatellites()}>show all satellites</button>)</span>
       : ' (select a planet above to filter satellites)';
@@ -109,12 +120,16 @@ export class Planets extends React.Component<{}, State> {
           height={450}
           headerHeight={90}
           rowHeight={40}
-          rowCount={this.state.planets.length}
-          rowGetter={({ index }: { index: number }) => this.state.planets[index]}
+          rowCount={this.state.planets.size}
+          rowGetter={({ index }: { index: number }) => this.state.planets.get(index)}
           rowClassName={this._rowClassName}
           onRowClick={(props: any) => this.showMoons(props.rowData)}
+          sort={this._sort}
+          sortBy={sortBy}
+          sortDirection={sortDirection}
         >
           <Column label='Name' dataKey='name' width={70} className='main-column' />
+          <Column label={this.columnHeader('Distance from Sun')} dataKey='distanceFromSun' width={80} />
           <Column label='Moons' dataKey='numberOfMoons' width={70} />
           <Column label={this.columnHeader('Mass')} dataKey='mass' width={70} />
           <Column label={this.columnHeader('Diameter')} dataKey='diameter' width={90} />
@@ -123,7 +138,6 @@ export class Planets extends React.Component<{}, State> {
           <Column label={this.columnHeader('Escape Velocity')} dataKey='escapeVelocity' width={80} />
           <Column label={this.columnHeader('Rotation Period')} dataKey='rotationPeriod' width={80} />
           <Column label={this.columnHeader('Length of Day')} dataKey='lengthOfDay' width={80} />
-          <Column label={this.columnHeader('Distance from Sun')} dataKey='distanceFromSun' width={80} />
           <Column label={this.columnHeader('Perihelion')} dataKey='perihelion' width={100} />
           <Column label={this.columnHeader('Aphelion')} dataKey='aphelion' width={90} />
           <Column label={this.columnHeader('Orbital Period')} dataKey='orbitalPeriod' width={70} />
@@ -153,7 +167,7 @@ export class Planets extends React.Component<{}, State> {
   componentDidMount() {
     dataLoader.loadAllPlanets((data: IPlanet[]) =>
       this.setState({
-        planets: data
+        planets: List(data),
       })
     );
 
@@ -169,4 +183,17 @@ export class Planets extends React.Component<{}, State> {
     );
   }
 
+  _sort({ sortBy, sortDirection }: { sortBy: string, sortDirection: SortDirectionType }) {
+    const sortedPlanets = this._sortList(sortBy, sortDirection);
+    this.setState({ sortBy, sortDirection, planets: sortedPlanets });
+  }
+
+  _sortList(sortBy: string, sortDirection: SortDirectionType): List<IPlanet> {
+    const sortedPlanets = this.state.planets.sortBy(planet => planet === undefined ? '' : planet[sortBy]);
+    return List<IPlanet>(sortedPlanets).update(
+      sortedPlanets => (sortDirection === SortDirection.DESC ? List(sortedPlanets.reverse()) : sortedPlanets),
+    );
+  }
 }
+
+export default Planets;
