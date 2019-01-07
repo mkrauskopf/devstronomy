@@ -17,7 +17,7 @@ export interface IPlanet {
 interface State {
   planets: List<IPlanet>;
   selectedPlanet: IPlanet | null;
-  satellites: ISatellite[];
+  satellites: List<ISatellite>;
   sortBy?: string;
   sortDirection?: SortDirectionType;
 }
@@ -54,7 +54,7 @@ export class Planets extends React.Component<{}, State> {
     this.state = {
       planets: List<IPlanet>(),
       selectedPlanet: null,
-      satellites: [],
+      satellites: List<ISatellite>(),
     }
   }
 
@@ -64,7 +64,7 @@ export class Planets extends React.Component<{}, State> {
     } else {
       dataLoader.loadSatellites(planet, (data: ISatellite[]) =>
         this.setState({
-          satellites: data,
+          satellites: List(data),
           selectedPlanet: planet
         })
       );
@@ -104,14 +104,14 @@ export class Planets extends React.Component<{}, State> {
 
     const planetSpan = <span className='header-highlight'>{planetName}</span>
     let satellitesHeader;
-    if (satellites.length === 0) {
+    if (satellites.size === 0) {
       satellitesHeader = <span>Planet {planetSpan} does not have any satellites</span>
     } else { // render table with satellites
       satellitesHeader = planetName === null
         ? 'Satellites of all planets'
         : <span>Satellites of planet {planetSpan}</span>
     }
-    satellitesHeader = <span><span className='header'>{satellitesHeader}</span><span> ({satellites.length} shown)</span></span>
+    satellitesHeader = <span><span className='header'>{satellitesHeader}</span><span> ({satellites.size} shown)</span></span>
 
     return (
       <div>
@@ -156,7 +156,7 @@ export class Planets extends React.Component<{}, State> {
           {satellitesHeader}{showAllButton}
         </div>
 
-        <Satellites planet={this.state.selectedPlanet} satellites={this.state.satellites} />
+        <Satellites planet={selectedPlanet} satellites={satellites} />
 
       </div>
     )
@@ -179,7 +179,7 @@ export class Planets extends React.Component<{}, State> {
   private loadAllSatellites = () => {
     dataLoader.loadAllSatellites((data: ISatellite[]) =>
       this.setState({
-        satellites: data,
+        satellites: List(data),
         selectedPlanet: null
       })
     );
@@ -196,6 +196,7 @@ export class Planets extends React.Component<{}, State> {
       sortedPlanets => (sortDirection === SortDirection.DESC ? List(sortedPlanets.reverse()) : sortedPlanets),
     );
   }
+
 }
 
 export default Planets;
