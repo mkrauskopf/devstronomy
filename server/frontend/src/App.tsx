@@ -81,6 +81,8 @@ const DatasetsContent = () => {
 const App = (props: { classes: any; }) => {
 
   const { classes } = props;
+  const DatasetsLink = (props:any) => <Link {...props} to="/datasets" />
+  const PlanetsLink = (props:any) => <Link {...props} to="/planets" />
   return (
     <Router>
       <MuiThemeProvider theme={theme}>
@@ -90,10 +92,10 @@ const App = (props: { classes: any; }) => {
             <AppBar position='static'>
               <Toolbar variant='dense'>
 
-                <Button variant='text' className={classes.button} component={props => <Link to="/planets" />}>
+                <Button variant='text' className={classes.button} component={PlanetsLink}>
                   Planets &amp; Satellites
                 </Button>
-                <Button variant='text' className={classes.button} component={props => <Link to="/datasets" />}>
+                <Button variant='text' className={classes.button} component={DatasetsLink}>
                   Datasets
                 </Button>
 
