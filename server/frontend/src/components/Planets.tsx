@@ -1,5 +1,5 @@
 import React from 'react';
-import Satellites, { ISatellite } from './Satellites'
+import Satellites from './Satellites'
 import { Column, Table, SortDirectionType, SortDirection, Index } from 'react-virtualized';
 import dataLoader from './data-loader-json'
 
@@ -17,7 +17,7 @@ export interface IPlanet {
 interface State {
   planets: List<IPlanet>;
   selectedPlanet: IPlanet | null;
-  satellites: List<ISatellite>;
+  nOfSatellites: number;
   sortBy?: string;
   sortDirection?: SortDirectionType;
 }
@@ -52,23 +52,15 @@ export class Planets extends React.Component<{}, State> {
     super(props);
 
     this.state = {
-      planets: List<IPlanet>(),
+      planets: List(),
       selectedPlanet: null,
-      satellites: List<ISatellite>(),
+      nOfSatellites: 0,
     }
   }
 
-  private showMoons = (planet: IPlanet): void => {
-    if (planet === this.state.selectedPlanet) {
-      this.loadAllSatellites();
-    } else {
-      dataLoader.loadSatellites(planet, (data: ISatellite[]) =>
-        this.setState({
-          satellites: List(data),
-          selectedPlanet: planet
-        })
-      );
-    }
+  private selectPlanet = (planet: IPlanet): void => {
+    // If the same planet is selected again, deselect it.
+    this.setState({ selectedPlanet: planet === this.state.selectedPlanet ? null : planet })
   }
 
   private rowClassName = ({ index }: Index): string => {
@@ -92,9 +84,15 @@ export class Planets extends React.Component<{}, State> {
     return <span>{column}<br /><span className='unit'>({this.units[column]})</span></span>
   }
 
+  private nOfSatellitesCallback = (nOfSatellites: number): void => {
+    this.setState({
+      nOfSatellites: nOfSatellites,
+    });
+  }
+
   render(): React.ReactNode {
     const selectedPlanet = this.state.selectedPlanet;
-    const satellites = this.state.satellites;
+    const nOfSatellites = this.state.nOfSatellites;
     const planetName = selectedPlanet === null ? null : selectedPlanet.name;
     const sortDirection = this.state.sortDirection;
     const sortBy = this.state.sortBy;
@@ -104,14 +102,14 @@ export class Planets extends React.Component<{}, State> {
 
     const planetSpan = <span className='header-highlight'>{planetName}</span>
     let satellitesHeader;
-    if (satellites.size === 0) {
+    if (nOfSatellites === 0) {
       satellitesHeader = <span>Planet {planetSpan} does not have any satellites</span>
     } else { // render table with satellites
       satellitesHeader = planetName === null
         ? 'Satellites of all planets'
         : <span>Satellites of planet {planetSpan}</span>
     }
-    satellitesHeader = <span><span className='header'>{satellitesHeader}</span><span> ({satellites.size} shown)</span></span>
+    satellitesHeader = <span><span className='header'>{satellitesHeader}</span><span> ({nOfSatellites} shown)</span></span>
 
     return (
       <div>
@@ -125,7 +123,7 @@ export class Planets extends React.Component<{}, State> {
           rowCount={this.state.planets.size}
           rowGetter={({ index }: Index) => this.state.planets.get(index)}
           rowClassName={this.rowClassName}
-          onRowClick={(props: any) => this.showMoons(props.rowData)}
+          onRowClick={(props: any) => this.selectPlanet(props.rowData)}
           sort={this.sort}
           sortBy={sortBy}
           sortDirection={sortDirection}
@@ -156,7 +154,7 @@ export class Planets extends React.Component<{}, State> {
           {satellitesHeader}{showAllButton}
         </div>
 
-        <Satellites planet={selectedPlanet} satellites={satellites} />
+        <Satellites planet={selectedPlanet} nOfSatellitesCallback={this.nOfSatellitesCallback} />
 
       </div>
     )
@@ -172,17 +170,12 @@ export class Planets extends React.Component<{}, State> {
         planets: List(data),
       })
     );
-
-    this.loadAllSatellites();
   }
 
   private loadAllSatellites = () => {
-    dataLoader.loadAllSatellites((data: ISatellite[]) =>
-      this.setState({
-        satellites: List(data),
-        selectedPlanet: null
-      })
-    );
+    this.setState({
+      selectedPlanet: null,
+    })
   }
 
   private sort = ({ sortBy, sortDirection }: { sortBy: string, sortDirection: SortDirectionType }) => {
