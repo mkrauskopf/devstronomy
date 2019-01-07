@@ -1,6 +1,6 @@
 import React from 'react';
 import Satellites, { ISatellite } from './Satellites'
-import { Column, Table, SortDirectionType, SortDirection } from 'react-virtualized';
+import { Column, Table, SortDirectionType, SortDirection, Index } from 'react-virtualized';
 import dataLoader from './data-loader-json'
 
 // styles
@@ -56,10 +56,9 @@ export class Planets extends React.Component<{}, State> {
       selectedPlanet: null,
       satellites: [],
     }
-    this._sort = this._sort.bind(this);
   }
 
-  showMoons = (planet: IPlanet) => {
+  private showMoons = (planet: IPlanet): void => {
     if (planet === this.state.selectedPlanet) {
       this.loadAllSatellites();
     } else {
@@ -72,7 +71,7 @@ export class Planets extends React.Component<{}, State> {
     }
   }
 
-  _rowClassName = ({ index }: { index: number }) => {
+  private rowClassName = ({ index }: Index): string => {
     if (index === -1) {
       return '';
     }
@@ -85,7 +84,11 @@ export class Planets extends React.Component<{}, State> {
     return '';
   }
 
-  columnHeader = (column: string) => {
+  /**
+   * @param {string} column column ID. Must be key in the 'units' dictionary.
+   * @returns generated node containing given text together with its unit.
+   */
+  private columnHeader = (column: string): React.ReactNode => {
     return <span>{column}<br /><span className='unit'>({this.units[column]})</span></span>
   }
 
@@ -120,10 +123,10 @@ export class Planets extends React.Component<{}, State> {
           headerHeight={90}
           rowHeight={40}
           rowCount={this.state.planets.size}
-          rowGetter={({ index }: { index: number }) => this.state.planets.get(index)}
-          rowClassName={this._rowClassName}
+          rowGetter={({ index }: Index) => this.state.planets.get(index)}
+          rowClassName={this.rowClassName}
           onRowClick={(props: any) => this.showMoons(props.rowData)}
-          sort={this._sort}
+          sort={this.sort}
           sortBy={sortBy}
           sortDirection={sortDirection}
         >
@@ -173,7 +176,7 @@ export class Planets extends React.Component<{}, State> {
     this.loadAllSatellites();
   }
 
-  loadAllSatellites() {
+  private loadAllSatellites = () => {
     dataLoader.loadAllSatellites((data: ISatellite[]) =>
       this.setState({
         satellites: data,
@@ -182,12 +185,12 @@ export class Planets extends React.Component<{}, State> {
     );
   }
 
-  _sort({ sortBy, sortDirection }: { sortBy: string, sortDirection: SortDirectionType }) {
-    const sortedPlanets = this._sortList(sortBy, sortDirection);
+  private sort = ({ sortBy, sortDirection }: { sortBy: string, sortDirection: SortDirectionType }) => {
+    const sortedPlanets = this.sortList(sortBy, sortDirection);
     this.setState({ sortBy, sortDirection, planets: sortedPlanets });
   }
 
-  _sortList(sortBy: string, sortDirection: SortDirectionType): List<IPlanet> {
+  private sortList = (sortBy: string, sortDirection: SortDirectionType): List<IPlanet> => {
     const sortedPlanets = this.state.planets.sortBy(planet => planet === undefined ? '' : planet[sortBy]);
     return List<IPlanet>(sortedPlanets).update(
       sortedPlanets => (sortDirection === SortDirection.DESC ? List(sortedPlanets.reverse()) : sortedPlanets),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Column, Table } from 'react-virtualized';
+import { Column, Table, Index } from 'react-virtualized';
 import { IPlanet } from './Planets';
 
 export interface ISatellite {
@@ -23,11 +23,11 @@ const Satellites: React.SFC<Props> = (props) => {
     'Magnitude': <span>V<sub>0</sub> or R</span>,
   };
 
-  const _rowClassName = ({ index }: { index: number }) => {
+  const rowClassName = ({ index }: Index): string => {
     return index % 2 === 0 ? 'oddRow' : '';
   };
 
-  const columnHeader = (column: string) => {
+  const columnHeader = (column: string): React.ReactNode => {
     return <span>{column}<br/><span className='unit'>({units[column]})</span></span>;
   };
 
@@ -38,7 +38,7 @@ const Satellites: React.SFC<Props> = (props) => {
            rowHeight={40}
            rowCount={props.satellites.length}
            rowGetter={({ index }) => props.satellites[index]}
-           rowClassName={_rowClassName}
+           rowClassName={rowClassName}
     >
       <Column label='Name' dataKey='name' width={105} className='main-column' />
       <Column label={columnHeader('GM')} dataKey='gm' width={95} />
