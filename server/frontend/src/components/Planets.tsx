@@ -1,6 +1,6 @@
 import React from 'react';
 import Satellites, { ISatellite } from './Satellites'
-import { Column, Table, SortDirectionType } from 'react-virtualized';
+import { Column, Table, SortDirectionType, SortDirection } from 'react-virtualized';
 import dataLoader from './data-loader-json'
 
 // styles
@@ -8,7 +8,6 @@ import '../css-react-virtualized/styles.css'; // only needs to be imported once
 import '../css/components/table.css';
 import '../css/index.css';
 import { List } from 'immutable';
-import SortDirection from "./SortDirection";
 
 export interface IPlanet {
   id: number;
