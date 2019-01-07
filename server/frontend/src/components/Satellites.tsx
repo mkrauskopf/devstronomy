@@ -94,22 +94,28 @@ class Satellites extends React.Component<Props, State> {
 
   private setSatellites = (satellites: ISatellite[]): void => {
     this.setState({
-      satellites: List(satellites),
+      satellites: this.sortRawData(satellites)
     });
     this.props.nOfSatellitesCallback(satellites.length);
   }
 
   // TODO: get rid of duplicated code for sorting routines.
   private sort = ({ sortBy, sortDirection }: { sortBy: string, sortDirection: SortDirectionType }) => {
-    const sortedSatellites = this.sortList(sortBy, sortDirection);
+    const sortedSatellites = this.sortList(sortBy, sortDirection, this.state.satellites);
     this.setState({ sortBy, sortDirection, satellites: sortedSatellites });
   }
 
-  private sortList = (sortBy: string, sortDirection: SortDirectionType): List<ISatellite> => {
-    const sortedSats = this.state.satellites.sortBy(sat => sat === undefined ? '' : sat[sortBy]);
+  private sortList = (sortBy: string, sortDirection: SortDirectionType, satellites: List<ISatellite>): List<ISatellite> => {
+    const sortedSats = satellites.sortBy(sat => sat === undefined ? '' : sat[sortBy]);
     return List<ISatellite>(sortedSats).update(
       sortedSats => (sortDirection === SortDirection.DESC ? List(sortedSats.reverse()) : sortedSats),
     );
+  }
+
+  private sortRawData = (satellites: ISatellite[]): List<ISatellite> => {
+    return this.state.sortBy && this.state.sortDirection
+      ? this.sortList(this.state.sortBy, this.state.sortDirection, List(satellites))
+      : List(satellites);
   }
 
 };
