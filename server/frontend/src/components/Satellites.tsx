@@ -106,10 +106,9 @@ class Satellites extends React.Component<Props, State> {
   }
 
   private sortList = (sortBy: string, sortDirection: SortDirectionType, satellites: List<ISatellite>): List<ISatellite> => {
-    const sortedSats = satellites.sortBy(sat => sat === undefined ? '' : sat[sortBy]);
-    return List<ISatellite>(sortedSats).update(
-      sortedSats => (sortDirection === SortDirection.DESC ? List(sortedSats.reverse()) : sortedSats),
-    );
+    return satellites
+      .sortBy(sat => sat[sortBy])
+      .update(sats => sortDirection === SortDirection.DESC ? sats.reverse() : sats);
   }
 
   private sortRawData = (satellites: ISatellite[]): List<ISatellite> => {
@@ -121,4 +120,3 @@ class Satellites extends React.Component<Props, State> {
 };
 
 export default Satellites;
-

@@ -77,7 +77,7 @@ export class Planets extends React.Component<{}, State> {
   }
 
   /**
-   * @param {string} column column ID. Must be key in the 'units' dictionary.
+   * @param {string} column column ID. Must be key in the `units` dictionary.
    * @returns generated node containing given text together with its unit.
    */
   private columnHeader = (column: string): React.ReactNode => {
@@ -184,10 +184,9 @@ export class Planets extends React.Component<{}, State> {
   }
 
   private sortList = (sortBy: string, sortDirection: SortDirectionType): List<IPlanet> => {
-    const sortedPlanets = this.state.planets.sortBy(planet => planet === undefined ? '' : planet[sortBy]);
-    return List<IPlanet>(sortedPlanets).update(
-      sortedPlanets => (sortDirection === SortDirection.DESC ? List(sortedPlanets.reverse()) : sortedPlanets),
-    );
+    return this.state.planets
+      .sortBy(planet => planet[sortBy])
+      .update(planets => (sortDirection === SortDirection.DESC ? List(planets.reverse()) : planets));
   }
 
 }
