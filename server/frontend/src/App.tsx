@@ -1,19 +1,19 @@
 import React from 'react';
-import { HashRouter as Router, Link } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import {HashRouter as Router, Link, LinkProps, Route} from 'react-router-dom';
 
-import { Planets } from './components/Planets';
+import {Planets} from './components/Planets';
 import Datasets from './components/Datasets';
 import Links from './links';
 
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
+import Button, {ButtonProps} from '@material-ui/core/Button';
+import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import amber from '@material-ui/core/colors/amber';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import LaunchIcon from '@material-ui/icons/Launch';
+import {LocationDescriptor} from "history";
 
 const theme = createMuiTheme({
   palette: {
@@ -33,7 +33,7 @@ const styles = () => ({
   launchIcon: {
     width: 13,
     height: 13,
-    color: '#66a',
+    color: 'white',
   },
 });
 
@@ -78,35 +78,50 @@ const DatasetsContent = () => {
   );
 };
 
+/** `MenuButton` button with React Router link. */
+class RouteMenuButton<ButtonProps extends { route: LocationDescriptor }>
+  extends React.Component<ButtonProps> {
+
+  render() {
+    return (
+      // see https://github.com/mui-org/material-ui/issues/850#issuecomment-334118855 for 'Link' explanation.
+      <MenuButton component={(linkProps: LinkProps) => <Link {...linkProps} to={this.props.route} />}
+                  {...this.props}>
+        {this.props.children}
+      </MenuButton>)
+  }
+
+}
+
+/** Menu button customised for Devstronomy. */
+class MenuButton extends React.Component<ButtonProps> {
+  render() {
+    return <Button style={{color: 'white'}} variant='text' {...this.props}>{this.props.children}</Button>
+  }
+}
+
 const App = (props: { classes: any; }) => {
 
-  const { classes } = props;
-  const DatasetsLink = (props:any) => <Link {...props} to="/datasets" />
-  const PlanetsLink = (props:any) => <Link {...props} to="/planets" />
+  const {classes} = props;
+
   return (
     <Router>
       <MuiThemeProvider theme={theme}>
         <div>
-
           <div className={classes.root}>
             <AppBar position='static'>
               <Toolbar variant='dense'>
 
-                <Button variant='text' className={classes.button} component={PlanetsLink}>
-                  Planets &amp; Satellites
-                </Button>
-                <Button variant='text' className={classes.button} component={DatasetsLink}>
-                  Datasets
-                </Button>
+                <RouteMenuButton className={classes.button} route='/planets'>Planets &amp; Satellites</RouteMenuButton>
+                <RouteMenuButton className={classes.button} route='/datasets'>Datasets</RouteMenuButton>
 
                 <div className={classes.grow} />
 
-                <Button variant='text'
-                        className={classes.button}
-                        target='_blank'
-                        href='https://github.com/mkrauskopf/devstronomy/'>
+                <MenuButton className={classes.button}
+                            target='_blank'
+                            href='https://github.com/mkrauskopf/devstronomy/'>
                   GitHub&nbsp;<LaunchIcon className={classes.launchIcon} />
-                </Button>
+                </MenuButton>
 
               </Toolbar>
             </AppBar>
