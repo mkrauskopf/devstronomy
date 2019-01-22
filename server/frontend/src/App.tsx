@@ -78,6 +78,7 @@ const DatasetsContent = () => {
   );
 };
 
+// TODO: I did not come up with a solution using `FunctionComponent`.
 /** `MenuButton` button with React Router link. */
 class RouteMenuButton<ButtonProps extends { route: LocationDescriptor }>
   extends React.Component<ButtonProps> {
@@ -94,11 +95,9 @@ class RouteMenuButton<ButtonProps extends { route: LocationDescriptor }>
 }
 
 /** Menu button customised for Devstronomy. */
-class MenuButton extends React.Component<ButtonProps> {
-  render() {
-    return <Button style={{color: 'white'}} variant='text' {...this.props}>{this.props.children}</Button>
-  }
-}
+const MenuButton: React.FunctionComponent<ButtonProps> = (props) => {
+  return <Button style={{color: 'white'}} variant='text' {...props}>{props.children}</Button>
+};
 
 const App = (props: { classes: any; }) => {
 
