@@ -46,7 +46,7 @@ export class Planets extends React.Component<{}, State> {
     'Number of Moons': <span>number</span>,
     'Ring System?': <span>Yes/No</span>,
     'Global Magnetic Field?': <span>Yes/No</span>,
-  }
+  };
 
   constructor(props: {}) {
     super(props);
@@ -61,7 +61,7 @@ export class Planets extends React.Component<{}, State> {
   private selectPlanet = (planet: IPlanet): void => {
     // If the same planet is selected again, deselect it.
     this.setState({ selectedPlanet: planet === this.state.selectedPlanet ? null : planet })
-  }
+  };
 
   private rowClassName = ({ index }: Index): string => {
     if (index === -1) {
@@ -74,7 +74,7 @@ export class Planets extends React.Component<{}, State> {
       return 'oddRow';
     }
     return '';
-  }
+  };
 
   /**
    * @param {string} column column ID. Must be key in the `units` dictionary.
@@ -82,13 +82,13 @@ export class Planets extends React.Component<{}, State> {
    */
   private columnHeader = (column: string): React.ReactNode => {
     return <span>{column}<br /><span className='unit'>({this.units[column]})</span></span>
-  }
+  };
 
   private nOfSatellitesCallback = (nOfSatellites: number): void => {
     this.setState({
       nOfSatellites: nOfSatellites,
     });
-  }
+  };
 
   render(): React.ReactNode {
     const selectedPlanet = this.state.selectedPlanet;
@@ -100,7 +100,7 @@ export class Planets extends React.Component<{}, State> {
       ? <span> (<button className='ahref' onClick={() => this.loadAllSatellites()}>show all satellites</button>)</span>
       : ' (select a planet above to filter satellites)';
 
-    const planetSpan = <span className='header-highlight'>{planetName}</span>
+    const planetSpan = <span className='header-highlight'>{planetName}</span>;
     let satellitesHeader;
     if (nOfSatellites === 0) {
       satellitesHeader = <span>Planet {planetSpan} does not have any satellites</span>
@@ -109,7 +109,7 @@ export class Planets extends React.Component<{}, State> {
         ? 'Satellites of all planets'
         : <span>Satellites of planet {planetSpan}</span>
     }
-    satellitesHeader = <span><span className='header'>{satellitesHeader}</span><span> ({nOfSatellites} shown)</span></span>
+    satellitesHeader = <span><span className='header'>{satellitesHeader}</span><span> ({nOfSatellites} shown)</span></span>;
 
     return (
       <div>
@@ -176,12 +176,12 @@ export class Planets extends React.Component<{}, State> {
     this.setState({
       selectedPlanet: null,
     })
-  }
+  };
 
   private sort = ({ sortBy, sortDirection }: { sortBy: string, sortDirection: SortDirectionType }) => {
     const sortedPlanets = this.sortList(sortBy, sortDirection);
     this.setState({ sortBy, sortDirection, planets: sortedPlanets });
-  }
+  };
 
   private sortList = (sortBy: string, sortDirection: SortDirectionType): List<IPlanet> => {
     return this.state.planets

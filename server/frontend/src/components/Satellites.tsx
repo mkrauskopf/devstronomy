@@ -22,7 +22,7 @@ interface State {
 class Satellites extends React.Component<Props, State> {
 
   constructor(props: Props) {
-    super(props)
+    super(props);
     this.state = {
       satellites: List()
     }
@@ -82,7 +82,7 @@ class Satellites extends React.Component<Props, State> {
 
   private loadAllSatellites = () => {
     dataLoader.loadAllSatellites(this.setSatellites);
-  }
+  };
 
   private loadSatellites = (planet: IPlanet | null): void => {
     if (planet === null) {
@@ -90,26 +90,26 @@ class Satellites extends React.Component<Props, State> {
     } else {
       dataLoader.loadSatellites(planet, this.setSatellites);
     }
-  }
+  };
 
   private setSatellites = (satellites: ISatellite[]): void => {
     this.setState({
       satellites: this.sortRawData(satellites)
     });
     this.props.nOfSatellitesCallback(satellites.length);
-  }
+  };
 
   // TODO: get rid of duplicated code for sorting routines.
   private sort = ({ sortBy, sortDirection }: { sortBy: string, sortDirection: SortDirectionType }) => {
     const sortedSatellites = this.sortList(sortBy, sortDirection, this.state.satellites);
     this.setState({ sortBy, sortDirection, satellites: sortedSatellites });
-  }
+  };
 
   private sortList = (sortBy: string, sortDirection: SortDirectionType, satellites: List<ISatellite>): List<ISatellite> => {
     return satellites
       .sortBy(sat => sat[sortBy])
       .update(sats => sortDirection === SortDirection.DESC ? sats.reverse() : sats);
-  }
+  };
 
   private sortRawData = (satellites: ISatellite[]): List<ISatellite> => {
     return this.state.sortBy && this.state.sortDirection
