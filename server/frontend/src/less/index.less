@@ -8,8 +8,8 @@ html {
 }
 
 body {
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   background: @background;
   color: #aaa;
   text-rendering: optimizeLegibility;
@@ -20,11 +20,17 @@ h1, h2, h3, h4, h5, h6 {
   color: @header-color;
 }
 
-.content, .contentCenter {
-  padding: 20px 20px 0px 20px;
+.homepage {
+  .content;
+  font-size: large;
+}
+
+.content {
+  padding: 20px 20px 0 20px;
 }
 
 .contentCenter {
+  .content;
   text-align: center;
 }
 
@@ -37,8 +43,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .datasets {
-  width:800px;
-  margin:0 auto;
+  width: 800px;
+  margin: 0 auto;
 }
 
 .highlight {
@@ -78,7 +84,7 @@ code {
 code.link {
   background: inherit;
   color: @link-color;
-  padding: 2px 0px 2px 0px;
+  padding: 2px 0 2px 0;
 }
 
 pre {
@@ -111,13 +117,13 @@ tr:nth-child(2n) {
 }
 
 button.ahref {
-  background:none!important;
-  color:inherit;
-  border:none;
-  padding:0!important;
+  background: none !important;
+  color: inherit;
+  border: none;
+  padding: 0 !important;
   font: inherit;
   /*border is optional*/
-  border-bottom:1px solid #999;
+  border-bottom: 1px solid #999;
   cursor: pointer;
 }
 

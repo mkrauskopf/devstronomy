@@ -1,6 +1,6 @@
 import React from 'react';
-import { HashLink as Link } from 'react-router-hash-link';
-import Links from './../links';
+import {HashLink as Link} from 'react-router-hash-link';
+import Links from '../../links';
 
 const github = 'https://github.com/mkrauskopf/devstronomy/blob/master/';
 
@@ -14,23 +14,35 @@ const satellitesCsvLink = gitHubLink('csv/', 'satellites.csv');
 const satellitesJsonLink = gitHubLink('json/', 'satellites.json');
 const datasetsSql = gitHubLink('sql/', 'devstronomy.sql');
 
-const Datasets = () => {
-
-  return(
-    <div>
+/**
+ * Represents 'Datasets' page of Devstronomy application. Provides information about available datasets, the download
+ * links and their sample usage (e.g., SQL selects).
+ */
+const DatasetsContent = () => {
+  return (
+    <div className='datasets'>
       <h1 className='content'>Datasets section</h1>
       <p>
         Devstronomy project aims to provide datasets related to astronomy in an accessible format (CSV, JSON, SQL).
-      <p>
+        <p>
 
-      </p>
+        </p>
         Currently, there are datasets for:
-          <ul>
-            <li>planets of our Solar System (+ Pluto)</li>
-            <li>natural satellites(moons) of all planets</li>
-          </ul>
+        <ul>
+          <li>planets of our Solar System (+ Pluto)</li>
+          <li>natural satellites(moons) of all planets</li>
+        </ul>
       </p>
 
+      <hr/>
+      <span className='warning'>Note:</span> the following is not migrated from original satellite dataset yet:
+      <ul>
+        <li>For <em>Magnitude</em> column in satellites dataset V<sub>0</sub> or R are not distinguished.</li>
+        <li>
+          <em>Uncertainties</em> for some values. For example, for original value <code>13.70±0.04</code> in JPL
+          dataset we have just <code>13.70</code> without <code>0.04</code> uncertainty.
+        </li>
+      </ul>
 
       <hr id='tableofcontents'/>
       <h2>Table of Contents</h2>
@@ -100,8 +112,10 @@ const Datasets = () => {
 
       <h4>Fields and units in the planetary dataset</h4>
 
-      <p>See also official <a href='https://nssdc.gsfc.nasa.gov/planetary/factsheet/planetfact_notes.html'>Planetary
-      Fact Sheet Notes</a> for more information about individual fields.</p>
+      <p>
+        See also official <a href='https://nssdc.gsfc.nasa.gov/planetary/factsheet/planetfact_notes.html'>Planetary Fact
+        Sheet Notes</a> for more information about individual fields.
+      </p>
 
       <ul>
         <li>Mass (10<sup>24</sup>kg)</li>
@@ -167,8 +181,10 @@ const Datasets = () => {
       <hr id='sql'/>
       <h2>SQL Dataset</h2>
 
-      <p>The {datasetsSql} creates tables for planets and their satellites and fill them with
-      data from the CSV files <Link to='#csv'>described above</Link>.</p>
+      <p>
+        The {datasetsSql} creates tables for planets and their satellites and fill them with data from the CSV
+        files <Link to='#csv'>described above</Link>.
+      </p>
 
       <p>For example for MySQL database following commands will create the database:</p>
 
@@ -315,8 +331,10 @@ mysql -u [uname] -p[pass] devstronomy &lt; data/sql/devstronomy.sql`}</pre>
 
       <h4 id='moons-inconsistency'>Inconsistency in the number of moons</h4>
 
-      <p>Note: the <code>planet.number_of_moons</code> does not reflect the number of records in the <code>satellite</code> table for Jupiter and
-      Saturn. See the SQL select below. (<em>TODO</em>: why)</p>
+      <p>
+        Note: the <code>planet.number_of_moons</code> does not reflect the number of records in
+        the <code>satellite</code> table for Jupiter and Saturn. See the SQL select below. (<em>TODO</em>: explain why)
+      </p>
 
       <pre>{
 `SELECT name, number_of_moons,
@@ -405,4 +423,4 @@ p.T.to_csv('planets.csv', header=False)`}</pre>
   );
 };
 
-export default Datasets;
+export default DatasetsContent;
