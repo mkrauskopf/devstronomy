@@ -20,54 +20,61 @@ const datasetsSql = gitHubLink('sql/', 'devstronomy.sql');
  */
 const DatasetsContent = () => {
   return (
-    <div className='datasets'>
+    <div className='flexCenter'>
       <h1 className='content'>Datasets section</h1>
       <p>
         Devstronomy project aims to provide datasets related to astronomy in an accessible format (CSV, JSON, SQL).
-        <p>
-
-        </p>
+      </p>
+      <p>
         Currently, there are datasets for:
+      </p>
+      <div>
         <ul>
           <li>planets of our Solar System (+ Pluto)</li>
           <li>natural satellites(moons) of all planets</li>
         </ul>
-      </p>
+      </div>
 
       <hr/>
-      <span className='warning'>Note:</span> the following is not migrated from original satellite dataset yet:
-      <ul>
-        <li>For <em>Magnitude</em> column in satellites dataset V<sub>0</sub> or R are not distinguished.</li>
-        <li>
-          <em>Uncertainties</em> for some values. For example, for original value <code>13.70±0.04</code> in JPL
-          dataset we have just <code>13.70</code> without <code>0.04</code> uncertainty.
-        </li>
-      </ul>
+      <p>
+        <span className='warning'>Note:</span> the following is not migrated from original satellite dataset yet:
+      </p>
+      <div>
+        <ul>
+          <li>For <em>Magnitude</em> column in satellites dataset V<sub>0</sub> or R are not distinguished.</li>
+          <li>
+            <em>Uncertainties</em> for some values. For example, for original value <code>13.70±0.04</code> in JPL
+            dataset we have just <code>13.70</code> without <code>0.04</code> uncertainty.
+          </li>
+        </ul>
+      </div>
 
       <hr id='tableofcontents'/>
       <h2>Table of Contents</h2>
-      <ol>
-        <li><Link to='#downloads'>Quick Downloads</Link></li>
-        <li><Link to='#information'>Datasets information</Link></li>
+      <div>
         <ol>
-          <li><Link to='#planets'>Planets</Link></li>
-          <li><Link to='#satellites'>Planetary Satellites</Link></li>
-        </ol>
-        <li><Link to='#csv'>CSV files</Link></li>
-        <li><Link to='#json'>JSON files</Link></li>
-        <li><Link to='#sql'>SQL Dataset</Link>
+          <li><Link to='#downloads'>Quick Downloads</Link></li>
+          <li><Link to='#information'>Datasets information</Link></li>
           <ol>
-            <li><Link to='#sql-examples'>SQL usage examples</Link>
-              <ol>
-                <li><Link to='#ten-moons-saturn'>Ten largest moons of Saturn</Link></li>
-                <li><Link to='#planets-ecc'>Planets ordered by eccentricity</Link></li>
-                <li><Link to='#moons-inconsistency'>Inconsistency in the number of moons</Link></li>
-              </ol>
-            </li>
+            <li><Link to='#planets'>Planets</Link></li>
+            <li><Link to='#satellites'>Planetary Satellites</Link></li>
           </ol>
-        </li>
-        <li><Link to='#implementation'>Implementation notes</Link></li>
-      </ol>
+          <li><Link to='#csv'>CSV files</Link></li>
+          <li><Link to='#json'>JSON files</Link></li>
+          <li><Link to='#sql'>SQL Dataset</Link>
+            <ol>
+              <li><Link to='#sql-examples'>SQL usage examples</Link>
+                <ol>
+                  <li><Link to='#ten-moons-saturn'>Ten largest moons of Saturn</Link></li>
+                  <li><Link to='#planets-ecc'>Planets ordered by eccentricity</Link></li>
+                  <li><Link to='#moons-inconsistency'>Inconsistency in the number of moons</Link></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li><Link to='#implementation'>Implementation notes</Link></li>
+        </ol>
+      </div>
 
 
       <hr id='downloads'/>
@@ -106,7 +113,8 @@ const DatasetsContent = () => {
 
       <p>
         The {planetCsvLink} file contains information about planets in our Solar System including dwarf planet Pluto.
-        The source of data is <a href='https://nssdc.gsfc.nasa.gov/planetary/factsheet/'>Planetary Fact Sheet</a> from {Links.jpl}.
+        The source of data is <a href='https://nssdc.gsfc.nasa.gov/planetary/factsheet/'>Planetary Fact
+        Sheet</a> from {Links.jpl}.
       </p>
 
 
@@ -117,28 +125,30 @@ const DatasetsContent = () => {
         Sheet Notes</a> for more information about individual fields.
       </p>
 
-      <ul>
-        <li>Mass (10<sup>24</sup>kg)</li>
-        <li>Diameter (km)</li>
-        <li>Density (kg/m<sup>3</sup>)</li>
-        <li>Gravity (m/s<sup>2</sup>)</li>
-        <li>Escape Velocity (km/s)</li>
-        <li>Rotation Period (hours)</li>
-        <li>Length of Day (hours)</li>
-        <li>Distance from Sun (10<sup>6</sup> km)</li>
-        <li>Perihelion (10<sup>6</sup> km)</li>
-        <li>Aphelion (10<sup>6</sup> km)</li>
-        <li>Orbital Period (days)</li>
-        <li>Orbital Velocity (km/s)</li>
-        <li>Orbital Inclination (degrees)</li>
-        <li>Orbital Eccentricity</li>
-        <li>Obliquity to Orbit (degrees)</li>
-        <li>Mean Temperature (C)</li>
-        <li>Surface Pressure (bars)</li>
-        <li>Number of Moons (number)</li>
-        <li>Ring System? (Yes/No)</li>
-        <li>Global Magnetic Field? (Yes/No)</li>
-      </ul>
+      <div>
+        <ul>
+          <li>Mass (10<sup>24</sup>kg)</li>
+          <li>Diameter (km)</li>
+          <li>Density (kg/m<sup>3</sup>)</li>
+          <li>Gravity (m/s<sup>2</sup>)</li>
+          <li>Escape Velocity (km/s)</li>
+          <li>Rotation Period (hours)</li>
+          <li>Length of Day (hours)</li>
+          <li>Distance from Sun (10<sup>6</sup> km)</li>
+          <li>Perihelion (10<sup>6</sup> km)</li>
+          <li>Aphelion (10<sup>6</sup> km)</li>
+          <li>Orbital Period (days)</li>
+          <li>Orbital Velocity (km/s)</li>
+          <li>Orbital Inclination (degrees)</li>
+          <li>Orbital Eccentricity</li>
+          <li>Obliquity to Orbit (degrees)</li>
+          <li>Mean Temperature (C)</li>
+          <li>Surface Pressure (bars)</li>
+          <li>Number of Moons (number)</li>
+          <li>Ring System? (Yes/No)</li>
+          <li>Global Magnetic Field? (Yes/No)</li>
+        </ul>
+      </div>
 
 
       <h3 id='satellites'>Planetary satellites (moons)</h3>
@@ -151,31 +161,37 @@ const DatasetsContent = () => {
 
       <h4>Fields and units in the satellites dataset</h4>
 
-      <ul>
-        <li><em>planet</em>: owning planet of the satellite</li>
-        <li><em>name</em>: name of the satellite</li>
-        <li><em>gm</em>: GM (km<sup>3</sup>/sec<sup>2</sup>)</li>
-        <li><em>radius</em>: Mean radius (km)</li>
-        <li><em>density</em>: Mean density (g/cm<sup>3</sup>)</li>
-        <li><em>magnitude</em>: Magnitude V<sub>0</sub> or R</li>
-        <li><em>albedo</em>: Geometric Albedo</li>
-      </ul>
+      <div>
+        <ul>
+          <li><em>planet</em>: owning planet of the satellite</li>
+          <li><em>name</em>: name of the satellite</li>
+          <li><em>gm</em>: GM (km<sup>3</sup>/sec<sup>2</sup>)</li>
+          <li><em>radius</em>: Mean radius (km)</li>
+          <li><em>density</em>: Mean density (g/cm<sup>3</sup>)</li>
+          <li><em>magnitude</em>: Magnitude V<sub>0</sub> or R</li>
+          <li><em>albedo</em>: Geometric Albedo</li>
+        </ul>
+      </div>
 
 
       <hr id='csv'/>
       <h2>CSV (comma-separated values) files</h2>
-      <ul>
-        <li>{planetCsvLink}</li>
-        <li>{satellitesCsvLink}</li>
-      </ul>
+      <div>
+        <ul>
+          <li>{planetCsvLink}</li>
+          <li>{satellitesCsvLink}</li>
+        </ul>
+      </div>
 
 
       <hr id='json'/>
       <h2>JSON</h2>
-      <ul>
-        <li>{planetJsonLink}</li>
-        <li>{satellitesJsonLink}</li>
-      </ul>
+      <div>
+        <ul>
+          <li>{planetJsonLink}</li>
+          <li>{satellitesJsonLink}</li>
+        </ul>
+      </div>
 
 
       <hr id='sql'/>
@@ -281,7 +297,7 @@ mysql -u [uname] -p[pass] devstronomy &lt; data/sql/devstronomy.sql`}</pre>
 
       <pre>SELECT name, orbital_eccentricity FROM planet ORDER BY orbital_eccentricity;</pre>
 
-      { /* Result of select: table of planets. */ }
+      { /* Result of select: table of planets. */}
       <table>
         <thead>
           <tr>
