@@ -3,3 +3,4 @@
 *.ipr
 *.iws
 .ipynb_checkpoints
+.DS_STORE
