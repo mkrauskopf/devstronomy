@@ -16,9 +16,9 @@ All code related to the Devstronomy development is being migrated to the
 
 ### Already migrated
 
-* frontend code-base
+* frontend
+* backend
 
 ### To be migrated
 
-* backend code-base
 * tools
